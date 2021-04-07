@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de : {{ app.user.prenom }} {{ app.user.nom }}{% endblock %}
+
+{% block body %}
+    {% block header %}
+		<header class="header">
+			<div class="titre">
+				<h1 class="header-titre">Passion Voyage</h1>
+				<h2 class="header-caption">
+					Partager nos voyages en famille.</h2>
+			</div>
+			{% block navigation %}
+				{% include "includes/_menu.html.twig" %}
+			{% endblock %}
+		</header>
+	{% endblock %}
+
+    {% block main %}
+    <div class="main">
+        <div class="container">
+            <h1 class="formulaire-titre">Profil de : {{ app.user.prenom }} {{ app.user.nom }} </h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table">
+                        <tbody>
+                            <tr class="texte-normal">
+                                <th >Nom</th>
+                                <td>{{ app.user.nom  }}</td>
+                            </tr>
+                            <tr class="texte-normal">
+                                <th>Prenom</th>
+                                <td>{{ app.user.prenom }}</td>
+                            </tr>
+                            <tr class="texte-normal">
+                                <th>Pseudo</th>
+                                <td>{{ app.user.pseudo }}</td>
+                            </tr>
+                            <tr class="texte-normal">
+                                <th>Email</th>
+                                <td>{{ app.user.email }}</td>
+                            </tr>
+                            <tr class="texte-normal">
+                                <th>Rôles</th>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                <td>Administrateur</td>
+                                {% elseif is_granted('ROLE_AUTEUR') %}
+                                <td>Membre actif</td>
+                                {% else %}
+                                <td>Invité</td>
+                                {% endif %}
+                            </tr>
+                            <tr class="texte-normal">
+                                <th>Adresse</th>
+                                <td>{{ app.user.adresse }}</td>
+                            </tr>
+                            <tr class="texte-normal">
+                                <th>Ville</th>
+                                <td>{{ app.user.ville }}</td>
+                            </tr>
+                            <tr class="texte-normal">
+                                <th>Code postal</th>
+                                <td>{{ app.user.cp }}</td>
+                            </tr>
+                            <tr class="texte-normal">
+                                <th>Téléphone</th>
+                                <td>{{ app.user.telephone }}</td>
+                            </tr>
+                            <tr class="texte-normal">
+                                <th>IsVerified</th>
+                                <td>{{ app.user.isVerified ? 'Oui' : 'Non' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <div style="border-style: none none none solid; border-color: #bc615a">
+                        <h3 class="formulaire-titre">Vos articles</h3>
+                        <p class="texte-normal" >Vous avez rédigé {{ articles | length }} article(s). 
+                        {% for article in articles %}
+                            <p class="texte-normal"> Titre : {{ article.titre }} </p>
+                        {% endfor %}
+                        
+                    </div>
+                    <div style="border-style: none none none solid; border-color: #bc615a">
+                        <h3 class="formulaire-titre">Vos commentaires</h3>
+                        <p class="texte-normal">Vous avez publié {{ commentaires | length }} commentaire(s). 
+                        {% for commentaire in commentaires %}
+                            <p class="texte-normal"> Titre : {{ commentaire.contenu | raw }} </p>
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+    {% block sidebar %}
+        <aside class="sidebar">
+            <div class="vertical-menu">
+                <a href="{{ path('user_profil_modifier', {'id': app.user.id}) }}" class="d-block formulaire-lien">Modifier le profil</a>
+                <a href="{{ path('modifierPassword', {'id': app.user.id}) }}" class="d-block formulaire-lien">Modifier le mot passe</a>
+                <a href="#" class="d-block formulaire-lien">Modifier mon avatar</a>
+                <br>
+                <br>
+                {#<a href="{{ path('supprimerUser', {'id': app.user.id}) }}" class="d-block formulaire-lien">Supprimer mon profil</a>#}
+                {% include 'user/_delete_form.html.twig' %}
+            </div> 
+        </aside>
+    {% endblock %}
+
+    <!-- ######### Bas de page ########### -->
+    {% block footer %}
+        {% include "includes/_footer.html.twig" %}
+    {% endblock %}
+{% endblock %}

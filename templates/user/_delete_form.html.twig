@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('supprimerUser', {'id': app.user.id}) }}" onsubmit="return confirm('Voulez-vous supprimer cet utilisateur?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ app.user.id) }}">
+    <button class="formulaire-bouton btn-warning">Supprimer le profil</button>
+</form>
+<p > Attention ! cette suppression sera définitive </p>

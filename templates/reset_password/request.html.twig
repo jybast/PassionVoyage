@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le mot de passe
+{% endblock %}
+
+{% block body %}
+    {% block header %}
+        <header class="header">
+            <div class="titre">
+                <h1 class="header-titre">Passion Voyage</h1>
+                <h2 class="header-caption">
+                    Partager nos voyages en famille.</h2>
+            </div>
+            {% block navigation %}{% endblock %}
+        </header>
+    {% endblock %}
+
+    <!-- ########## Corps de page ########## -->
+    {% block main %}
+        <div class="main">
+            {% for flashError in app.flashes('reset_password_error') %}
+                <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+            {% endfor %}
+
+            <div class="container">
+                <div class="formulaire-conteneur">
+                    <div class="formulaire-masque">
+                        <div class="formulaire-inner">
+                            <h1 class="formulaire-titre">Modifier le mot de passe</h1>
+                            {{ form_start(requestForm) }}
+
+                            {{ form_row(requestForm.email, {
+                                    label: 'Adresse mail', 
+                                    label_attr: {class: 'formulaire-label'},
+                                    attr: {class: 'formulaire-input'}
+                                    }
+                                ) }}
+                            <div>
+                                <small class="texte-normal">
+                                    Entrer votre adresse mail et vous recevrez un lien pour modifier le mot de passe.
+
+                                </small>
+                            </div>
+
+                            <button class="formulaire-bouton btn-info">Modifier le mot de passe</button>
+                            {{ form_end(requestForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    {% endblock %}
+    {% block sidebar %}
+        <aside class="sidebar">
+            <h2>Gérer vos identifiants</h2>
+            <p class="texte-normal"> Si vous avez oublié vos identifiants ou si vous souhaitez modifier votre mot de passe, merci de remplir le formulaire ci-contre.</p>
+            <p class="texte-normal"> Vous recevrez un mail vous indiquant la marche à suivre. </p>
+        </aside>
+    {% endblock %}
+
+    <!-- ######### Bas de page ########### -->
+    {% block footer %}
+        {% include "includes/_footer.html.twig" %}
+    {% endblock %}
+
+{% endblock %}

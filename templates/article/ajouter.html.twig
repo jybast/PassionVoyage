@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Publier un article{% endblock %}
+
+{% block body %}
+    <h1>Publier un article</h1>
+
+    {{ include('article/_form.html.twig') }}
+
+    <a href="{{ path('article_lister') }}">Retour à la liste</a>
+{% endblock %}

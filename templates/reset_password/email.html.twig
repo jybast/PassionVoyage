@@ -1,0 +1,11 @@
+<h1 class="formulaire-titre">Bonjour</h1>
+
+<p class="texte-normal"> <img src="{{ asset('assets/img/blog_logo.png')}}" alt="Logo" width="60px"> Ce mail vous est envoyé par le blog Voyage passion suite à votre demande. </p>
+
+<p class="texte-normal">Pour modifier votre mot de passe, utilisez le lien</p>
+
+<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+
+<p class="texte-normal">Ce lien expire dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+
+<p class="texte-normal">Cordialement</p>

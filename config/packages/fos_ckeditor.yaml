@@ -1,0 +1,46 @@
+# Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
+
+twig:
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+
+fos_ck_editor:
+    configs:
+        min_config:
+            language: fr
+            toolbar:
+                - { name: "styles", items: ['Bold', 'Italic', 'Underline', 'Strike', 'Blockquote', '-', 'Link', '-', 'RemoveFormat', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Image', 'Table', '-', 'Styles', 'Format','Font','FontSize', '-', 'TextColor', 'BGColor', 'Source'] }
+
+            filebrowserBrowseRoute: elfinder
+            filebrowserBrowseRouteParameters: []    
+
+        max_config:  # nom de la configuration
+            langage : fr
+            toolbar: 
+                - { name: "styles", items: ['Bold', 'Italic', 'Underline', 'Strike', 'Blockquote','-','Link','-','RemoveFormat','-','Styles','Format','Font','FontSize','-', 'TextColor', 'BGColor', 'Source'] }
+                - { name: 'document', items: ['Save', 'NewPage', 'Preview', 'Print']}
+                - { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] }
+                - { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] }
+                - { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] }
+            filebrowserBrowseRoute: elfinder
+            filebrowserBrowseRouteParameters: []
+
+        full_toolbar:
+            langage : fr
+            toolbar: 
+                - { name: 'document', items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] }
+                - { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] }
+                - { name: 'editing', items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] }
+                - { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] }
+
+                - { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] }
+                - { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] }
+                - { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] }
+                - { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] }
+
+                - { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] }
+                - { name: 'colors', items: [ 'TextColor', 'BGColor' ] }
+                - { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] }
+                - { name: 'about', items: [ 'About' ] }
+            filebrowserBrowseRoute: elfinder
+            filebrowserBrowseRouteParameters: []

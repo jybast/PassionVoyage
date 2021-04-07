@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des articles{% endblock %}
+
+{% block body %}
+    <h1>Liste des articles</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Legende</th>
+                <th>Slug</th>
+                <th>Sommaire</th>
+                <th>Contenu</th>
+                <th>Valide</th>
+                <th>PublierAt</th>
+                <th>ModifierAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.titre }}</td>
+                <td>{{ article.legende }}</td>
+                <td>{{ article.slug }}</td>
+                <td>{{ article.sommaire }}</td>
+                <td>{{ article.contenu }}</td>
+                <td>{{ article.valide ? 'Oui' : 'Non' }}</td>
+                <td>{{ article.publierAt ? article.publierAt|date('d/m/Y') : '' }}</td>
+                <td>{{ article.modifierAt ? article.modifierAt|date('d/m/Y') : '' }}</td>
+                <td>
+                    <a href="{{ path('article_afficher', {'id': article.id}) }}">Afficher</a>
+                    <a href="{{ path('article_modifier', {'id': article.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">Aucun article publié</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {# Affichage de la pagination #}
+    <nav aria-label="Page navigation example">
+        {{ knp_pagination_render(articles, 
+            '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig',
+            {},
+            {
+                'position': 'right',
+                'size': 'small',
+                'rounded': true,
+            } ) 
+        }}
+    </nav>
+
+    <a href="{{ path('article_ajouter') }}">Ecrire un article</a>
+{% endblock %}

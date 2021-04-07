@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+	{% block header %}
+		<header class="header">
+			<div class="titre">
+				<h1 class="header-titre">Passion Voyage</h1>
+				<h2 class="header-caption">
+					Partager nos voyages en famille.</h2>
+			</div>
+			{% block navigation %}
+				{% include "includes/_menu.html.twig" %}
+			{% endblock %}
+		</header>
+	{% endblock %}
+	{% block main %}
+		<div class="main">
+			<div class="container">
+				<div class="formulaire-conteneur">
+				<a href="{{ path('app_accueil') }}" class="formulaire-label">Retour à la page d'accueil</a>
+					<div class="formulaire-masque">
+					
+					{% for message in app.Flashes('message')  %}
+						<div class="p-3 my-2 rounded-2 success">{{ message }} </div>
+					{% endfor %}
+					
+					<h1 class="formulaire-titre">Nous contacter</h1>
+					
+					{{ form(form) }}
+					</div>
+				</div >
+				
+			</div>
+		</div>
+	{% endblock %}
+
+	{% block sidebar %}
+		<aside class="sidebar">
+			Carte de localisation
+		</aside>
+	{% endblock %}
+
+	<!-- ######### Bas de page ########### -->
+        {% block footer %}
+            {% include "includes/_footer.html.twig" %}
+         {% endblock %}
+{% endblock %}

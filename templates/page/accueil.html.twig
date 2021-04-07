@@ -1,0 +1,210 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block body %}
+	{% block header %}
+		<header class="header">
+			<div class="titre">
+				<h1 class="header-titre">Passion Voyage</h1>
+				<h2 class="header-caption">
+					Partager nos voyages en famille.</h2>
+			</div>
+			{% block navigation %}
+				{% include "includes/_menu.html.twig" %}
+			{% endblock %}
+		</header>
+	{% endblock %}
+
+	{% block main %}
+		<div class="main">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<h1 class="formulaire-titre">Bonjour  {{ (app.user) ? app.user.prenom : 'Cher visiteur' }} ✅</h1>
+					</div>
+					<div class="col-md-6">
+						<form class="d-flex">
+							<input class="form-control me-2" type="search" placeholder="Rechercher un article" aria-label="Search">
+							<button class="btn btn-outline-success" type="submit">Rechercher</button>
+						</form>
+					</div>
+				</div>
+				<!-- Message récupéré après validation de l'adresse mail -->
+				{% for message in app.flashes('success') %}
+					<div class="alert alert-success" role="alert">{{ message }}</div>
+				{% endfor %}
+				<div class="row">
+					<h1 class="formulaire-titre">Nos actualités</h1>
+					<div class="col-md-4">
+						<div class="card bg-light text-dark " style="width: 18rem;">
+							<img src="{{ asset('assets/img/cc_transparent.png') }}" class="card-img" alt="Mmon image">
+							
+								<h5 class="card-title">Notre camping-car</h5>
+								<p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ipsam quae voluptatibus, dolorem libero, numquam excepturi dolorum necessitatibus sed praesentium totam aliquid reprehenderit autem facere omnis. Fugit minus neque repellendus!</p>
+								<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam vero quidem atque? Dolores, deleniti. Esse nostrum perferendis rerum. Nihil facilis natus velit reiciendis omnis totam fugiat? Architecto magni porro aut?</p>
+							
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="card bg-light text-dark " style="width: 18rem;">
+							<img src="{{ asset('assets/img/cc_transparent.png') }}" class="card-img" alt="Mmon image">
+							
+								<h5 class="card-title">Notre camping-car</h5>
+								<p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ipsam quae voluptatibus, dolorem libero, numquam excepturi dolorum necessitatibus sed praesentium totam aliquid reprehenderit autem facere omnis. Fugit minus neque repellendus!</p>
+								<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam vero quidem atque? Dolores, deleniti. Esse nostrum perferendis rerum. Nihil facilis natus velit reiciendis omnis totam fugiat? Architecto magni porro aut?</p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="card bg-light text-dark " style="width: 18rem;">
+							<img src="{{ asset('assets/img/cc_transparent.png') }}" class="card-img" alt="Mmon image">
+							
+								<h5 class="card-title">Notre camping-car</h5>
+								<p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ipsam quae voluptatibus, dolorem libero, numquam excepturi dolorum necessitatibus sed praesentium totam aliquid reprehenderit autem facere omnis. Fugit minus neque repellendus!</p>
+								<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam vero quidem atque? Dolores, deleniti. Esse nostrum perferendis rerum. Nihil facilis natus velit reiciendis omnis totam fugiat? Architecto magni porro aut?</p>
+						</div>
+					</div>
+
+				</div>
+				<div class="row">
+					<p class="texte-centre" style="margin: 10px;"> -- </p>
+				</div>
+				<div class="row">
+					<h1 class="formulaire-titre">Articles récents</h1>
+					<div class="col-md-4">
+						<div class="card" style="width: 18rem;">
+							<img src="{{ asset('assets/img/desert.jpg') | imagine_filter('photo_page')}}" class="card-img-top" alt="Photo article">
+							<div class="card-header">
+								Premier article
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Titre</h5>
+								<h6 class="card-subtitle mb-2 text-muted">Sous-titre</h6>
+								<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, nobis dolor tenetur eaque delectus culpa, harum voluptates saepe consectetur, repudiandae ex! Reiciendis possimus officia eaque at numquam ipsum quasi id!</p>
+								<a href="#" class="formulaire-bouton btn-info">Lire l'article </a>
+							</div>
+							<div class="card-footer text-muted">
+								Publié il ya deux jours
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+					<div class="card" style="width: 18rem;">
+							<img src="{{ asset('assets/img/desert.jpg') | imagine_filter('vignette')}}" class="card-img-top" alt="Photo article">
+							<div class="card-header">
+								Premier article
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Titre</h5>
+								<h6 class="card-subtitle mb-2 text-muted">Sous-titre</h6>
+								<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, nobis dolor tenetur eaque delectus culpa, harum voluptates saepe consectetur, repudiandae ex! Reiciendis possimus officia eaque at numquam ipsum quasi id!</p>
+								<a href="#" class="formulaire-bouton btn-info">Lire l'article</a>
+							</div>
+							<div class="card-footer text-muted">
+								Publié il ya deux jours
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+					<div class="card" style="width: 18rem;">
+							<img src="{{ asset('assets/img/desert.jpg') | imagine_filter('photo_article')}}" class="card-img-top" alt="Photo article">
+							<div class="card-header">
+								Premier article
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Titre</h5>
+								<h6 class="card-subtitle mb-2 text-muted">Sous-titre</h6>
+								<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, nobis dolor tenetur eaque delectus culpa, harum voluptates saepe consectetur, repudiandae ex! Reiciendis possimus officia eaque at numquam ipsum quasi id!</p>
+								<a href="#" class="formulaire-bouton btn-info">Lire l'article</a>
+							</div>
+							<div class="card-footer text-muted">
+								Publié il ya deux jours
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<p class="texte-centre" style="margin: 10px;"> -- </p>
+				</div>
+
+			</div>
+		</div>
+	
+{% endblock %}
+
+{% block sidebar %}
+	<aside class="sidebar">
+		<div class="row">
+			<h1 class="formulaire-titre"> Qui sommes nous ?</h1>
+			<p class="texte-normal texte-centre"> <img src="{{ asset('assets/img/desert.jpg') }}" alt="Mon logo" width="250px"></p>
+			<p class="texte-normal">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis, similique facere cumque illo placeat dicta pariatur excepturi veniam praesentium iusto cum doloremque, sed maxime sequi incidunt aperiam asperiores odio corporis!</p>
+		</div>
+		
+		<div class="row">
+			<h1 class="formulaire-titre"> Entrer dans la danse</h1>
+			<p class="texte-normal texte-centre"> 
+			<a href="{{ path('app_register') }}" > <button type="submit" class="formulaire-bouton btn-info">S'inscrire</button></a>
+			</p>
+			<p class="texte-normal">
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis, similique facere cumque illo placeat dicta pariatur excepturi veniam praesentium iusto cum doloremque, sed maxime sequi incidunt aperiam asperiores odio corporis!
+			</p>
+			<p class="texte-normal texte-centre">
+				Lire notre politique de confidentialité :
+			
+			<!-- Button trigger modal -->
+			<button type="button" class="formulaire-bouton btn-info" data-bs-toggle="modal" data-bs-target="#rgpd">
+			Gestion des données
+			</button>
+			<p>
+		</div>
+		<div class="row">
+			<h1 class="formulaire-titre"> Pourquoi nous suivre?</h1>
+			<p class="texte-normal"> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis, similique facere cumque illo placeat dicta pariatur excepturi veniam praesentium iusto cum doloremque, sed maxime sequi incidunt aperiam asperiores odio corporis!
+			</p>
+			
+			
+
+				<!-- Modal -->
+				<div class="modal fade" id="rgpd" tabindex="-1" aria-labelledby="rgpdlLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Gestion des données personnelles</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+							<p class="texte-normal"> Vous pouvez consulter les données vous concernant en vous connectant avec vos identifiants et ouvrir le lien "Mon profil".</p>
+
+							<p class="texte-normal"> Les informations recueillies sur ce site sont enregistrées dans un fichier informatisé par l'administrateur responsable du site pour la gestion des membres inscrits et de leurs activités sur le site.
+
+							Les données collectées seront accessibles et communiquées aux seules personnes inscrites.</p>
+
+							<p class="texte-normal">Les données sont conservées pendant la durée de validité de l'inscription. Les données personnelles et les informations y étant attachées seront supprimées quand l'utilisateur décide de ne plus être inscrit sur le site.</p>
+
+							<p class="texte-normal">Vous pouvez accéder aux données vous concernant, les rectifier, demander leur effacement. Vous pouvez retirer à tout moment votre consentement au traitement de vos données.</p>
+
+							<p class="texte-normal">Consultez le site cnil.fr pour plus d’informations sur vos droits.
+
+							Pour exercer ces droits ou pour toute question sur le traitement de vos données par le site, vous pouvez contacter l'administrateur responsable du site : [admin@passion-voyage.org] </p>
+
+
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="formulaire-bouton btn-info" data-bs-dismiss="modal">Fermer</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+		</div>
+	</aside>
+{% endblock %}
+
+<!-- ######### Bas de page ########### -->
+{% block footer %}
+	{% include "includes/_footer.html.twig" %}
+{% endblock %}{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le profil de {% endblock %}
+
+{% block body %}
+    <h1>Modifier le profil de </h1>
+
+    {{ include('user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <a href="{{ path('listerUser') }}">Retour à la liste</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+{% endblock %}

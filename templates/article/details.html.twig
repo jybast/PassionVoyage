@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{article.titre}}
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"/>
+{% endblock %}
+
+{% block body %}
+	<!-- ########  Haut de page  ########## -->
+	{% block header %}
+		<header class="header">
+			<div class="titre">
+				<h1 class="header-titre">Passion Voyage</h1>
+				<h2 class="header-caption">
+					Partager nos voyages en famille.</h2>
+			</div>
+			{% block navigation %}{% endblock %}
+		</header>
+	{% endblock %}
+
+	<!-- ########## Corps de page ########## -->
+
+
+	{% block main %}
+		<div class="container">
+			{% for message in app.flashes('message') %}
+				<div class="bg-success">{{ message }}</div>
+			{% endfor %}
+			<div>
+				<div>
+					{{ article.titre }}</div>
+				<div>
+					{{ article.legende}}</div>
+				<div>
+					{{article.sommaire | raw}}</div>
+				<div>
+					{{article.contenu | raw}}</div>
+
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contact">
+					Contacter l'auteur
+				</button>
+			</div>
+            <div>
+                <h2>Liste des commentaires</h2>
+
+                
+            </div>
+            <div>
+                <h2>Ajouter un commentaire</h2>
+
+                {{ form(commentForm) }}
+
+            </div>
+			<!-- Modal -->
+			<div class="modal fade" id="contact" tabindex="-1" aria-labelledby="contactLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Contacter l'auteur</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							{{form_start(form)}}
+
+							{{form_widget(form.titre)}}
+							{{form_widget(form.email)}}
+							{{form_widget(form.message)}}
+
+							{{ form_end(form)}}
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary">Envoyer</button>
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	{% endblock %}
+
+	{% block sidebar %}
+		<aside class="sidebar"></aside>
+	{% endblock %}
+
+
+	<!-- ######### Bas de page ########### -->
+	{% block footer %}
+		{% include "includes/_footer.html.twig" %}
+	{% endblock %}
+
+
+{% endblock %}

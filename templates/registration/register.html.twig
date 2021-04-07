@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}S'enregistrer
+{% endblock %}
+
+{% block body %}
+
+	{% block header %}
+		<header class="header">
+			<div class="titre">
+				<h1 class="header-titre">Passion Voyage</h1>
+				<h2 class="header-caption">
+					Partager nos voyages en famille.</h2>
+			</div>
+			{% block navigation %}{% endblock %}
+		</header>
+	{% endblock %}
+
+	{% block main %}
+		<div class="main">
+			<div class="formulaire-conteneur">
+				<div class="formulaire-masque">
+                    <div class="formulaire-inner">
+                        {% for flashError in app.flashes('verify_email_error') %}
+                            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                        {% endfor %}
+
+                        <h1 class="formulaire-titre">S'enregistrer</h1>
+
+
+                        {{ form_start(registrationForm) }}
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.email, {
+                                    label: 'Adresse mail', 
+                                    label_attr: {class: 'formulaire-label'},
+                                    attr: {class: 'formulaire-input'}
+                                    }
+                                ) }}
+                                {{ form_row(registrationForm.plainPassword, {
+                                    label: 'Mot de passe',
+                                    label_attr: {class: 'formulaire-label'},
+                                    attr: {class: 'formulaire-input'}
+                                }) }}
+                                {{ form_row(registrationForm.pseudo, {
+                                    label: 'Votre pseudo',
+                                    label_attr: {class: 'formulaire-label'},
+                                    attr: {class: 'formulaire-input'}
+                                }) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.nom, {
+                                    label: 'Votre nom',
+                                    label_attr: {class: 'formulaire-label'},
+                                    attr: {class: 'formulaire-input'}
+                                }) }}
+                                {{ form_row(registrationForm.prenom, {
+                                    label: 'Votre prénom',
+                                    label_attr: {class: 'formulaire-label'},
+                                    attr: {class: 'formulaire-input'}
+                                }) }}
+                                {{ form_row(registrationForm.adresse, {
+                                    label: 'Votre adresse',
+                                    label_attr: {class: 'formulaire-label'},
+                                    attr: {class: 'formulaire-input'}
+                                }) }}
+                                {{ form_row(registrationForm.ville, {
+                                    label: 'Votre ville',
+                                    label_attr: {class: 'formulaire-label'},
+                                    attr: {class: 'formulaire-input'}
+                                }) }}
+                                
+                                {{ form_row(registrationForm.cp, {
+                                    label: 'Le code postal',
+                                    label_attr: {class: 'formulaire-label'},
+                                    attr: {class: 'formulaire-input'}
+                                }) }}
+                                {{ form_row(registrationForm.telephone, {
+                                    label: 'Votre numéro de téléphone',
+                                    label_attr: {class: 'formulaire-label'},
+                                    attr: {class: 'formulaire-input'}
+                                }) }}
+                            </div>
+                        </div>
+                        {{ form_row(registrationForm.agreeTerms, {
+                            label: 'Vous devez accepter que vos données personnelles soient enregistrées',
+                            label_attr: {class: 'formulaire-label'},
+
+                        }) }}
+
+                        <button type="submit" class="formulaire-bouton btn-info">S'enregistrer</button>
+                        {{ form_end(registrationForm) }}
+                    </div>
+                    <div>
+                        <a class="formulaire-lien" href="{{ path('app_accueil') }} "> Pas envie ? Retour à l'accueil </a>
+                    </div>
+
+			    </div>
+		    </div>
+	    </div>
+    {% endblock %}
+
+    {% block sidebar %}
+        <aside class="sidebar">
+            <h2>Gestion de vos données personnelles</h2>
+            <p class="texte-normal"> En vous enregistrant sur le site vous acceptez que vos données personnelles soient conservées pour permettre de vous identifier lors de vos connexions </p>
+            <p class="texte-normal"> Vous avez accès a vos données et vous vous avez la possibilités de les modifier</p>
+            <p class="texte-normal">Vous pouvez demander au gestionnaire du site de supprimer toutes vos données si vous ne souhaitez plus y figurer.</p>
+        </aside>
+    {% endblock %}
+
+    <!-- ######### Bas de page ########### -->
+    {% block footer %}
+        {% include "includes/_footer.html.twig" %}
+    {% endblock %}
+
+{% endblock %}

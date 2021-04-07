@@ -1,0 +1,30 @@
+{# TODO: Mise en forme du formulaire #}
+
+{{ form_start(form) }}
+
+    {{ form_row(form.titre, {
+        label: 'Titre de l\'article', 
+        label_attr: {class: 'formulaire-label'},
+        attr: {class: 'formulaire-input'}
+    })}}
+    {{ form_row(form.legende, {
+        label: 'Sous-titre de l\'article', 
+        label_attr: {class: 'formulaire-label'},
+        attr: {class: 'formulaire-input'}
+    })}}
+    {{ form_row(form.sommaire, {
+        label: 'Résumé de l\'article', 
+        label_attr: {class: 'formulaire-label'},
+    
+    })}}
+    {{ form_row(form.contenu, {
+        label: 'Texte de l\'article', 
+        label_attr: {class: 'formulaire-label'},
+    
+    })}}
+    
+
+
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Sauvegarder') }}</button>
+{{ form_end(form) }}

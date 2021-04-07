@@ -1,0 +1,334 @@
+/***********************************************/
+/** Feuille de style pour le site BlogVoyage
+/** 
+/** Date : 10 mars 2021
+/** Version : 1.0
+/**
+/************************************************/
+
+:root {
+    --main-radius: 5px;
+    --main-padding: 5px;
+    --couleur-titre: gold;
+    --couleur-soustitre: #ffff8c;
+    --couleur-menu: #f0ec0e;
+    --couleur-marron: #bc615a;
+    --couleur-marron-clair: #c8a88c;
+    --couleur-beige: #eaceae;
+    --couleur-beige-clair: #efe600;
+    --couleur-bleu-ciel: #cfe1e9;
+    --couleur-bleu-mer: #73bcd6;
+
+
+}
+
+/** container pour le formatage de la page en Grid CSS */
+.grid-container{
+    display: grid;
+    height:100vh;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1.5fr 2fr 0.5fr;
+    grid-gap: 0.2rem;
+    grid-template-areas: 
+        "header header header header"
+
+        "sidebar main main main"
+        "footer footer footer footer";
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 12px;
+    color: black ;
+    text-align: center;
+}
+
+.header{
+
+    background: cadetblue;
+    grid-area: header;
+    background-image: url('../img/cabine.jpg');
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1.5fr 0.5fr;
+    grid-gap: 0.2rem;
+    grid-template-areas: 
+        "titre titre titre titre"
+        "menu menu menu menu";
+
+}
+
+.header .header-titre{
+
+    text-align: center;
+    font-family: "Poppins italic";
+    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--couleur-soustitre);
+    font-size: 3rem;
+    margin-top: 50px;
+
+}
+
+.header .header-caption{
+    font-family: "Poppins italic";
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--couleur-soustitre);
+    font-size: 1.4rem;
+    font-style: italic;
+}
+
+.titre {
+    grid-area: titre;
+}
+
+.menu {
+    grid-area: menu;
+}
+
+.main {
+    background:var(--couleur-beige);
+    grid-area: main;
+}
+
+.sidebar {
+    background: rgb(186, 197, 186);
+    grid-area: sidebar;
+}
+
+.footer {
+    background: black;
+    color: lavender;
+    grid-area: footer;
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1.5fr 0.5fr;
+    grid-gap: 0.2rem;
+    grid-template-areas: 
+        "footer1 footer2 footer3 footer4"
+        "copyright copyright copyright copyright";
+
+}
+
+.footer1 {
+    grid-area: footer1;
+}
+
+.footer2 {
+    grid-area: footer2;
+}
+
+.footer3 {
+    grid-area: footer3;
+}
+
+.footer4 {
+    grid-area: footer4;
+}
+
+.copyright {
+    grid-area:copyright;
+}
+    
+/*******************************************
+/*
+/* Gestion du CSS Responsive
+/*
+/*********************************************/
+
+@media only screen and (max-width: 500px) {
+    .grid-container{
+
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 1fr);
+        grid-gap: 0.2rem;
+        grid-template-areas: 
+            "header"
+            "sidebar"
+            "main"
+            "footer";
+        font-family: "Montserrat-Regular", sans-serif;
+        font-weight: 700;
+        text-transform: none;
+        font-size: 12px;
+        color: black ;
+        text-align: center;
+    }
+
+    .header {
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.5fr 0.2fr;
+        background:var(--couleur-bleu-ciel);
+       
+        font-size:10px;
+    }
+
+    .footer {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 1fr);
+        grid-gap: 0.2rem;
+        grid-template-areas: 
+            "footer1"
+            "footer2"
+            "footer3"
+            "footer4"
+            "copyright";
+    }
+
+
+}
+
+/** ------------------------ **/
+.nav-menu {
+    color:var(--couleur-menu);
+    margin-right: 15px;
+    font-family: cursive;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.vertical-menu {
+    color:var(--couleur-menu);
+    margin-right: 15px;
+    font-family: cursive;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+  
+.vertical-menu a {
+    text-decoration: none;        /* Remove underline from links */
+}
+  
+.vertical-menu a:hover {
+    background-color: #ccc; /* Dark grey background on mouse-over */
+}
+  
+.vertical-menu a.active {
+    background-color: #4CAF50; /* Add a green color to the "active/current" link */
+    color: white;
+}
+
+/** ------- Formulaires login, registratration, reset-password -------*/
+
+.formulaire-conteneur{
+    max-width: 500px;
+    padding-top: 8vh;
+    margin: 0 auto;
+    margin-bottom: 60px;
+}
+
+.formulaire-masque{
+    background: var(--couleur-beige);
+    padding: 30px 30px 20px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.formulaire-inner{
+    padding: 20px;
+}
+
+.formulaire-logo {
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+.formulaire-titre{
+    font-family: "Montserrat-Bold", sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 1.5em;
+    line-height: 1.625;
+    color:var(--couleur-marron);
+    text-shadow: 6px 7px 8px #2e2727;
+    text-align: center;
+}
+
+.formulaire-lien{
+    font-family: "Montserrat-Bold", sans-serif;
+    font-weight: 500;
+    font-size: 1em;
+    line-height: 1.625;
+    color:var(--couleur-marron);
+    text-shadow: 6px 7px 8px #2e2727;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.formulaire-label {
+    font-family: "Montserrat-Bold", sans-serif;
+    font-weight: 500;
+    font-size: 1.2em;
+    line-height: 1.625;
+    color:var(--couleur-marron);
+    text-shadow: 6px 7px 8px #2e2727;
+    text-align: center;
+}
+
+.formulaire-input {
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.formulaire-bouton {
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: var(--couleur-marron-clair);
+    border: 1px solid transparent;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+/** ----- Mise en forme textes ---------**/
+
+.texte-normal {
+    font-family: "Montserrat-Regular", sans-serif;
+    font-weight: 500;
+    font-size: 1.2em;
+    line-height: 1.625;
+    color: black;
+    text-align: justify;
+    padding: 15px;
+
+
+}
+
+.texte-centre {
+    text-align: center;
+}
+
+.texte-italique {
+    font-style: italic;
+    text-align: justify;
+}

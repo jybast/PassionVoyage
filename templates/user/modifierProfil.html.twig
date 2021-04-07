@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le profil de {{app.user.prenom}} {{app.user.nom}} {% endblock %}
+
+{% block body %}
+    {% block header %}
+		<header class="header">
+			<div class="titre">
+				<h1 class="header-titre">Passion Voyage</h1>
+				<h2 class="header-caption">
+					Partager nos voyages en famille.</h2>
+			</div>
+			{% block navigation %}
+				{% include "includes/_menu.html.twig" %}
+			{% endblock %}
+		</header>
+	{% endblock %}
+
+    {% block main %}
+        <div class="main">
+            <div class="formulaire-conteneur">
+                <h1 class="formulaire-titre">Modifier le profil de {{app.user.prenom}} {{app.user.nom}}</h1>
+                 {{ form_start(form)  }}
+                <div class="row">
+                   
+                    <div class="col-md-6">
+                        {{ form_row(form.nom)  }}
+                        {{ form_row(form.prenom)  }}
+                        {{ form_row(form.pseudo)  }}
+                        {{ form_row(form.email, { 'attr': { 'readonly': true} })  }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.adresse)  }}
+                        {{ form_row(form.ville)  }}
+                        {{ form_row(form.cp)  }}
+                        {{ form_row(form.telephone)  }}
+                    </div>
+                    
+                </div>
+                {{ form_end(form)  }}
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block sidebar %}
+    <aside class="sidebar">
+        <p> Vous avez la possibilité de modifier les données </p>
+        <p> Votre adresse mail est votre identifiant, vous ne pourrez pas la modifier </p>
+        <div class="vertical-menu">
+            <a href="{{ path('profilUser', {'id': app.user.id}) }}" class="d-block formulaire-lien">Retour à votre profil</a>
+            <a href="{{ path('modifierPassword', {'id': app.user.id}) }}" class="d-block formulaire-lien">Modifier le mot passe</a>
+            <a href="#" class="d-block formulaire-lien">Modifier mon avatar</a>
+            <br>
+            <br>
+            {#<a href="{{ path('supprimerUser', {'id': app.user.id}) }}" class="d-block formulaire-lien">Supprimer mon profil</a>#}
+            {% include ('user/_delete_form.html.twig') %}
+        </div> 
+    </aside    
+    {% endblock %}
+
+    {% block footer %}
+        <footer class="footer">
+
+        </footer> 
+    {% endblock %}
+  
+    
+{% endblock %}
