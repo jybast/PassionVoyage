@@ -1,0 +1,80 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Gérer les articles
+{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-9">
+
+			<h1>Gérer les articles</h1>
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Titre</th>
+						<th>légende</th>
+						<th>Publié le</th>
+						<th>Modifié le</th>
+						<th>Auteur</th>
+						<th>Valide</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for article in articles %}
+						<tr>
+							<td>{{article.id}}</td>
+							<td>{{article.titre}}</td>
+							<td>{{article.legende | raw}}</td>
+							<td>{{article.publierAt | date('d/m/Y h:m')}}</td>
+							<td>{{article.modifierAt | date('d/m/Y h:m')}}</td>
+							<td>{{article.auteur.pseudo}}</td>
+							<td>
+								{# {{article.valide}} #}
+								<label
+									class="form-check form-switch">
+									{# Non #}
+									<input class="form-check-input" type="checkbox" {{ (article.valide) ? 'checked' : '' }} data-id="{{article.id}}">
+									<span class="slider"></span>
+									{# Oui #}
+								</label>
+							</td>
+							<td class="d-grid gap-2 d-md-flex justify-content-md-end">
+								{% if (article.valide == 0)  %}
+									<a href="{{ path('admin_article_activer', {id: article.id }) }}" class="formulaire-bouton btn-info btn-sm">Activer</a>
+								{% else %}
+									<a href="{{ path('admin_article_activer', {id: article.id }) }}" class="formulaire-bouton btn-info btn-sm">Désactiver</a>
+								{% endif %}
+
+								{{ include('article/_delete_form.html.twig') }}
+							</td>
+
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+{% endblock %}
+
+{% block javascipts %}
+	<script>
+		window.onload = () => { 
+			// on cherche tous les type = checkbox
+			let activer = document.querySelectorAll( "[type=checkbox]" );
+			// sur chaque lien je mets un ecouteur d'évènement sur click
+			for ( let bouton of activer ){
+				bouton.addEventListener("click", function () { 
+				let xmlHttp = new XMLHttpRequest;
+				// je vais chercher l'id de l'article
+				xmlHttp.open("get", `/admin/article/activer/${this.dataset.id}` );
+				xmlHttp.send();
+				} );
+			} 
+		}
+	</script>
+{% endblock %}

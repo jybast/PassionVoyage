@@ -1,0 +1,29 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Tableau de bord {% endblock %}
+
+{% block body %}
+
+	<div class="row">
+		<div class="col-sm-4 col-md-4 col-lg-4">
+			<div class="sidebar">
+				<nav class="nav flex-column">
+					<a class="nav-link active" href="#">Active</a>
+					<a class="nav-link" href="#">Link</a>
+					<a class="nav-link" href="#">Link</a>
+					<a class="nav-link disabled" href="#">Disabled</a>
+				</nav>
+			</div>
+		</div>
+		<div class="col-sm-8 col-md-8 col-lg-8">
+
+			<h1>Tableau de bord</h1>
+            
+            <ul>
+            <li>Nombre de membres inscrits</li>
+            <li>Nombre d'articles</li>
+            </ul>
+		</div>
+	</div>
+	{{ include('includes/_footer.html.twig')}}
+{% endblock %}

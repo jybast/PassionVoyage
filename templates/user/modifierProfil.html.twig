@@ -58,10 +58,12 @@
     </aside    
     {% endblock %}
 
-    {% block footer %}
-        <footer class="footer">
 
-        </footer> 
+    {% block footer %}
+       <footer class="footer">
+       {% include "includes/_footer.html.twig" %}
+       </footer>
+
     {% endblock %}
   
     

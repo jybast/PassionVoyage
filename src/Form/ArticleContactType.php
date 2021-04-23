@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ArticleContactType extends AbstractType
 {
@@ -29,6 +30,12 @@ class ArticleContactType extends AbstractType
             ->add('message', CKEditorType::class, [
                 'label' => 'Votre message'
             ])
+            ->add('Envoyer', SubmitType::class, [
+                'attr' => [
+                    'class' => 'formulaire-bouton btn-info'
+                ]
+            ]
+            )
         ;
     }
 

@@ -39,6 +39,11 @@ class Categorie
      */
     private $articles;
 
+    /**
+     * @ORM\Column(type="string", length=7, nullable=true)
+     */
+    private $couleur;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -132,6 +137,18 @@ class Categorie
         if ($this->articles->removeElement($article)) {
             $article->removeCategorie($this);
         }
+
+        return $this;
+    }
+
+    public function getCouleur(): ?string
+    {
+        return $this->couleur;
+    }
+
+    public function setCouleur(?string $couleur): self
+    {
+        $this->couleur = $couleur;
 
         return $this;
     }

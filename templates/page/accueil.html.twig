@@ -31,107 +31,67 @@
 						</form>
 					</div>
 				</div>
+				<hr>
+				<hr>
 				<!-- Message récupéré après validation de l'adresse mail -->
 				{% for message in app.flashes('success') %}
 					<div class="alert alert-success" role="alert">{{ message }}</div>
 				{% endfor %}
 				<div class="row">
 					<h1 class="formulaire-titre">Nos actualités</h1>
-					<div class="col-md-4">
+					{% for actualite in actualites %}
+						<div class="col-md-4">
 						<div class="card bg-light text-dark " style="width: 18rem;">
-							<img src="{{ asset('assets/img/cc_transparent.png') }}" class="card-img" alt="Mmon image">
+							<img src="{{ asset('assets/img/desert.jpg') | imagine_filter('photo_article')}}" class="card-img" alt="Mmon image">
 							
-								<h5 class="card-title">Notre camping-car</h5>
-								<p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ipsam quae voluptatibus, dolorem libero, numquam excepturi dolorum necessitatibus sed praesentium totam aliquid reprehenderit autem facere omnis. Fugit minus neque repellendus!</p>
-								<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam vero quidem atque? Dolores, deleniti. Esse nostrum perferendis rerum. Nihil facilis natus velit reiciendis omnis totam fugiat? Architecto magni porro aut?</p>
+								<h5 class="card-title">{{ actualite.titre | raw}}</h5>
+								<p class="card-text">{{ actualite.contenu | raw}}</p>
+								<p class="card-text"><span class="fa fa-calendar"></span>{{ actualite.publierAt | date('d/m/Y') }}</p>
 							
 						</div>
 					</div>
-					<div class="col-md-4">
-						<div class="card bg-light text-dark " style="width: 18rem;">
-							<img src="{{ asset('assets/img/cc_transparent.png') }}" class="card-img" alt="Mmon image">
-							
-								<h5 class="card-title">Notre camping-car</h5>
-								<p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ipsam quae voluptatibus, dolorem libero, numquam excepturi dolorum necessitatibus sed praesentium totam aliquid reprehenderit autem facere omnis. Fugit minus neque repellendus!</p>
-								<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam vero quidem atque? Dolores, deleniti. Esse nostrum perferendis rerum. Nihil facilis natus velit reiciendis omnis totam fugiat? Architecto magni porro aut?</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="card bg-light text-dark " style="width: 18rem;">
-							<img src="{{ asset('assets/img/cc_transparent.png') }}" class="card-img" alt="Mmon image">
-							
-								<h5 class="card-title">Notre camping-car</h5>
-								<p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ipsam quae voluptatibus, dolorem libero, numquam excepturi dolorum necessitatibus sed praesentium totam aliquid reprehenderit autem facere omnis. Fugit minus neque repellendus!</p>
-								<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam vero quidem atque? Dolores, deleniti. Esse nostrum perferendis rerum. Nihil facilis natus velit reiciendis omnis totam fugiat? Architecto magni porro aut?</p>
-						</div>
-					</div>
-
+					{% endfor %}
 				</div>
 				<div class="row">
-					<p class="texte-centre" style="margin: 10px;"> -- </p>
+					<hr>
 				</div>
 				<div class="row">
 					<h1 class="formulaire-titre">Articles récents</h1>
-					<div class="col-md-4">
-						<div class="card" style="width: 18rem;">
-							<img src="{{ asset('assets/img/desert.jpg') | imagine_filter('photo_page')}}" class="card-img-top" alt="Photo article">
-							<div class="card-header">
-								Premier article
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">Titre</h5>
-								<h6 class="card-subtitle mb-2 text-muted">Sous-titre</h6>
-								<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, nobis dolor tenetur eaque delectus culpa, harum voluptates saepe consectetur, repudiandae ex! Reiciendis possimus officia eaque at numquam ipsum quasi id!</p>
-								<a href="#" class="formulaire-bouton btn-info">Lire l'article </a>
-							</div>
-							<div class="card-footer text-muted">
-								Publié il ya deux jours
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-					<div class="card" style="width: 18rem;">
-							<img src="{{ asset('assets/img/desert.jpg') | imagine_filter('vignette')}}" class="card-img-top" alt="Photo article">
-							<div class="card-header">
-								Premier article
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">Titre</h5>
-								<h6 class="card-subtitle mb-2 text-muted">Sous-titre</h6>
-								<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, nobis dolor tenetur eaque delectus culpa, harum voluptates saepe consectetur, repudiandae ex! Reiciendis possimus officia eaque at numquam ipsum quasi id!</p>
-								<a href="#" class="formulaire-bouton btn-info">Lire l'article</a>
-							</div>
-							<div class="card-footer text-muted">
-								Publié il ya deux jours
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-					<div class="card" style="width: 18rem;">
-							<img src="{{ asset('assets/img/desert.jpg') | imagine_filter('photo_article')}}" class="card-img-top" alt="Photo article">
-							<div class="card-header">
-								Premier article
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">Titre</h5>
-								<h6 class="card-subtitle mb-2 text-muted">Sous-titre</h6>
-								<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, nobis dolor tenetur eaque delectus culpa, harum voluptates saepe consectetur, repudiandae ex! Reiciendis possimus officia eaque at numquam ipsum quasi id!</p>
-								<a href="#" class="formulaire-bouton btn-info">Lire l'article</a>
-							</div>
-							<div class="card-footer text-muted">
-								Publié il ya deux jours
-							</div>
-						</div>
-					</div>
-				</div>
 
+					{% for article in articles %}
+						<div class="card" style="width: 18rem;">
+							<img src="{{ asset('uploads/images/'~ article.media[0].nom) | imagine_filter('photo_article') }}" class="card-img-top mt-2" alt="Photo article">
+							<div class="card-header">
+								{{article.titre}}
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">{{ article.titre}}</h5>
+								<h6 class="card-subtitle mb-2 text-muted">{{ article.legende}}</h6>
+								<p class="card-text">{{ article.sommaire | raw}}</p>
+								<a href="{{ path('article_afficher', {slug : article.slug})}}" class="formulaire-bouton btn-info">Lire l'article </a>
+							</div>
+							<div class="card-footer text-muted">
+								Publié le {{ article.publierAt | date('d/m/Y')}}
+							</div>
+						</div>
+					{% else %}
+						<div>
+							<img src="{{ asset('assets/img/blog_logo.png') | imagine_filter('photo_article') }}" alt="logo">
+						</div>
+						<div>
+						<tr>
+                            <td colspan="10" class="texte-normal">Soyez le premier à publier un article</td>
+                        </tr>
+						
+						</div>
+					{% endfor %}
+				</div>
 				<div class="row">
-					<p class="texte-centre" style="margin: 10px;"> -- </p>
+					<hr>
 				</div>
 
 			</div>
 		</div>
-	
 {% endblock %}
 
 {% block sidebar %}

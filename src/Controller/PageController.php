@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Form\ContactType;
+use App\Repository\ActualiteRepository;
+use App\Repository\ArticleRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 /**
  * Controleur des pages génériques de l'application
@@ -16,15 +19,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PageController extends AbstractController
 {
     /**
-     * @Route("/accueil", name="app_accueil")
+     * @Route("/", name="app_accueil")
      *
      * @return Response
      */
-    public function accueil(): Response
+    public function accueil(ArticleRepository $articleRepository, ActualiteRepository $actualiteRepository): Response
     {
-        
+        // récupère les derniers articles publiés et valides
+        //$articles = $articleRepository->findAll();
+        $articles = $articleRepository->findByValide(true, 3);
+         // récupère les trois dernières actualités publiées
+        $actualites = $actualiteRepository->lastActu();
+
         return $this->render('page/accueil.html.twig', [
-            'controller_name' => 'PageController',
+            'articles' => $articles,
+            'actualites' => $actualites
         ]);
     }
     
@@ -60,7 +69,7 @@ class PageController extends AbstractController
                ->from($contact->get('email')->getData())     // on va chercher dans le formulaire $contact l'email de l'envoi
                ->to('adresse-du-site@domaine.fr ')        // c'est l'adresse du site à contacter
                ->subject('Contact depuis le site - Mon site ' )
-               ->htmlTemplate('masques/email-contact.html.twig')     // fichier twig du template
+               ->htmlTemplate('page/masques/email-contact.html.twig')     // fichier twig du template
                ->context([                                           // toutes les données dont on a besoin dans le template twig
                    'mail' => $contact->get('email')->getData(),
                    'sujet' => $contact->get('sujet')->getData(),
@@ -75,7 +84,7 @@ class PageController extends AbstractController
             $this->addFlash('message', 'Votre mail de contact a bien été envoyé');
 
             // on renvoie sur la route sur la quelle nous sommes 
-            return $this-> redirectToRoute('app_home');
+            return $this-> redirectToRoute('app_accueil');
 
         }
 

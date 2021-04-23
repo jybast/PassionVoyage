@@ -1,0 +1,50 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Categories
+{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-4">
+			<nav>
+				<li><a href="{{ path('admin_categorie_ajouter') }}">Ajouter une catégorie</a></li>
+				<li>2</li>
+				<li>3</li>
+			</nav>
+		</div>
+		<div class="col-md-8">
+
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Couleur</th>
+						<th scope="col">Parent</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for categorie in categories %}
+						<tr>
+							<th scope="row">{{ categorie.id}}</th>
+							<td>{{ categorie.nom}}</td>
+							<td>{{ categorie.couleur}}</td>
+							<td>{{ categorie.parent}}</td>
+							<td>
+								<a href="{{ path('admin_categorie_afficher', {'id': categorie.id}) }}">Afficher</a>
+								<a href="{{ path('admin_categorie_modifier', {'id': categorie.id}) }}">Modifier</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="3">Je n'ai trouvé !</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+      
+		</div>
+	</div>
+{% endblock %}

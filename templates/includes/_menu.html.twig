@@ -21,7 +21,7 @@
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li>
-								<a class="dropdown-item" href="#">Voyages</a>
+								<a class="dropdown-item" href="{{ path('article_lister') }}">Liste complète</a>
 							</li>
 							<li>
 								<a class="dropdown-item" href="#">Conseils</a>
@@ -39,7 +39,7 @@
 					{% endif %}
 					{% if is_granted('ROLE_ADMIN') %}
 					<li class="nav-item">
-						<a class="nav-menu" href="">Backend</a>
+						<a class="nav-menu" href="{{ path('admin_dashboard')}}">Backend</a>
 					</li>
 					{% endif %}
 					<li class="nav-item">

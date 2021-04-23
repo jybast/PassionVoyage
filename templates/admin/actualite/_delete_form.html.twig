@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('admin_actualite_supprimer', {'id': actualite.id}) }}" onsubmit="return confirm('Voulez-vous réellement supprimer cette actualité?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ actualite.id) }}">
+    <button class="formulaire-bouton btn-info btn-sm">Supprimer</button>
+</form>

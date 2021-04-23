@@ -73,7 +73,7 @@ class Article
     private $modifierAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Media::class, mappedBy="article", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Media::class, mappedBy="article", orphanRemoval=true, cascade={"persist"})
      */
     private $media;
 
@@ -207,6 +207,12 @@ class Article
         return $this->media;
     }
 
+    /**
+     * Ajouter ; mettre cascade={'persist'} sur la propriété $media
+     *
+     * @param Media $medium
+     * @return self
+     */
     public function addMedium(Media $medium): self
     {
         if (!$this->media->contains($medium)) {

@@ -22,23 +22,20 @@
         <div class="grid-container">
         {% block body %}
 
-        <!-- ########  Haut de page  ########## --> 
-        {% block header %}
-            <header class="header">
-                <div class="titre">
-                    <h1 class="header-titre">Passion Voyage</h1>
-                    <h2 class="header-caption"> Partager nos voyages en famille.</h2>
-                </div>
-                {% block navigation %}
-                    
-                {% endblock %}
-            </header>
-        {% endblock %}
-        
+            <!-- ########  Haut de page  ########## --> 
+            {% block header %}
+                <header class="header">
+                    <div class="titre">
+                        <h1 class="header-titre">Passion Voyage</h1>
+                        <h2 class="header-caption"> Partager nos voyages en famille.</h2>
+                    </div>
+                    {% block navigation %}
+                        
+                    {% endblock %}
+                </header>
+            {% endblock %}
 
-        <!-- ########## Corps de page ########## -->
-        
-         
+            <!-- ########## Corps de page ########## -->
             {% block main %}
                 <div class="main">
                   
@@ -51,11 +48,10 @@
                 </aside>
             {% endblock %}
 
-
-        <!-- ######### Bas de page ########### -->
-        {% block footer %}
-            {% include "includes/_footer.html.twig" %}
-         {% endblock %}
+            <!-- ######### Bas de page ########### -->
+            {% block footer %}
+                {% include "includes/_footer.html.twig" %}
+            {% endblock %}
          
         {% endblock %}        
         </div>  <!-- Fin bloc grid-container -->

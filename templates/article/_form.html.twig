@@ -1,5 +1,5 @@
 {# TODO: Mise en forme du formulaire #}
-
+<div class="container">
 {{ form_start(form) }}
 
     {{ form_row(form.titre, {
@@ -12,19 +12,60 @@
         label_attr: {class: 'formulaire-label'},
         attr: {class: 'formulaire-input'}
     })}}
+
+    {{ form_row(form.images, {
+        label: 'Sélectionner les images pour cet article ;   ', 
+        label_attr: {class: 'formulaire-label'},
+       
+    })}}
+
+    <div class="mt-5">
     {{ form_row(form.sommaire, {
         label: 'Résumé de l\'article', 
         label_attr: {class: 'formulaire-label'},
     
     })}}
+    </div>
     {{ form_row(form.contenu, {
         label: 'Texte de l\'article', 
         label_attr: {class: 'formulaire-label'},
     
     })}}
-    
+    <div class="row">
+        <div class="col-md-6">
+        {{ form_row(form.categorie, {
+            label: 'Sélectionner une catégorie ', 
+            label_attr: {class: 'formulaire-label'},
+            attr: {
+                class: 'formulaire-input'
+            }
+        })}}
+        </div>
+        <div class="col-md-6">
+        {{ form_row(form.motcle, {
+            label: 'Sélectionner les mots clés ', 
+            label_attr: {class: 'formulaire-label'},
+            attr: {
+                class: 'formulaire-input'
+            }
+        })}}
+        </div>
+    </div>
 
+    {# On vérifie si on est sur la route article_modifier et on affiche les images #}
+    {% if app.request.attributes.get('_route') == 'article_modifier' %}
+        <h2>Images</h2>
+        {% for image in article.media %}
+            <div>
+                <img src="{{ asset('/uploads/images/'~ image.nom) | imagine_filter('photo_article')}}" alt="Image">
+                {# balise pour supprimer - vers la route supprimer image - ajoute dataset et génère le token 'deleteId' #}
+               <a href="{{ path('article_supprimer_image', {id: image.id} ) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id)}}">Supprimer l'image </a>
+            </div>
+        {% endfor %}
+    {% endif %}
 
+<button class="formulaire-bouton btn-info">{{ button_label|default('Sauvegarder') }}</button>
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Sauvegarder') }}</button>
+    
 {{ form_end(form) }}
+</div>

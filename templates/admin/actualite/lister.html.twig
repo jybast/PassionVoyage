@@ -1,0 +1,51 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Les actualités{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-3">
+        <a href="{{ path('admin_actualite_ajouter') }}">Ajouter une actualité</a>
+    </div>
+    <div class="col-md-9">
+    <h1 class="article-titre">Les actualités</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Contenu</th>
+                <th>Date</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for actualite in actualites %}
+            <tr>
+                <td>{{ actualite.id }}</td>
+                <td>{{ actualite.titre | raw}}</td>
+                <td>{{ actualite.contenu | raw }}</td>
+                <td>{{ actualite.publierAt ? actualite.publierAt|date('d/m/Y H:i:s') : '' }}</td>
+                <td>{{ actualite.image }}</td>
+                <td>
+                    <a href="{{ path('admin_actualite_afficher', {'id': actualite.id}) }}">Afficher</a>
+                    <a href="{{ path('admin_actualite_modifier', {'id': actualite.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Soyez le premier à rédiger une actualité</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+</div>
+   
+
+    
+
+    
+{% endblock %}

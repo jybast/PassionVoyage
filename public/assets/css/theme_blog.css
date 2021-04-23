@@ -312,6 +312,12 @@
 
 /** ----- Mise en forme textes ---------**/
 
+.article-titre {
+	font: bold 60px Helvetica, Arial, Sans-serif;
+	text-align: center; color: #eee;
+	text-shadow: 0px 2px 6px #333;
+}
+
 .texte-normal {
     font-family: "Montserrat-Regular", sans-serif;
     font-weight: 500;
@@ -331,4 +337,22 @@
 .texte-italique {
     font-style: italic;
     text-align: justify;
+}
+
+.texte-message{
+    font-family: "Montserrat-Regular", sans-serif;
+    font-weight: 500;
+    font-size: 1.2em;
+    line-height: 1.3;
+    color: black;
+    background-color: chartreuse;
+}
+
+.cadre-image{
+    margin-top: 50px;
+    padding-top: 15px;
+}
+
+.fond-gris{
+    background-color: rgb(223, 222, 222);
 }

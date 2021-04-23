@@ -5,8 +5,11 @@ twig:
         - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
 
 fos_ck_editor:
+    default_config: min_config
+
     configs:
         min_config:
+            #extraPlugins: "wordcount"
             language: fr
             toolbar:
                 - { name: "styles", items: ['Bold', 'Italic', 'Underline', 'Strike', 'Blockquote', '-', 'Link', '-', 'RemoveFormat', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Image', 'Table', '-', 'Styles', 'Format','Font','FontSize', '-', 'TextColor', 'BGColor', 'Source'] }
@@ -44,3 +47,16 @@ fos_ck_editor:
                 - { name: 'about', items: [ 'About' ] }
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters: []
+
+        basic:
+            language: fr
+            toolbar:
+                - { name: "styles", items: ['Bold', 'Italic' ] }
+
+            filebrowserBrowseRoute: elfinder
+            filebrowserBrowseRouteParameters: []    
+    
+    #plugins:
+     #   wordcount:
+      #      path: "/bundles/fosckeditor/plugins/wordcount/" 
+       #     filename: "plugin.js"

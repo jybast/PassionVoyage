@@ -3,9 +3,54 @@
 {% block title %}Publier un article{% endblock %}
 
 {% block body %}
-    <h1>Publier un article</h1>
+     {% block header %}
+		<header class="header">
+			<div class="titre">
+				<h1 class="header-titre">Passion Voyage</h1>
+				<h2 class="header-caption">
+					Partager nos voyages en famille.</h2>
+			</div>
+			{% block navigation %}
+				{% include "includes/_menu.html.twig" %}
+			{% endblock %}
+		</header>
+    {% endblock %}
 
-    {{ include('article/_form.html.twig') }}
+    {% block main %}
+        <div class="main">
+			<div class="container">
+                <div class="formulaire-lien">
+                    Vous êtes connecté en tant que {{ article.auteur.pseudo}} 
+                </div>
+                <div>
+                    <h1 class="formulaire-titre">Publier un article</h1>
+                    {{ include('article/_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
 
-    <a href="{{ path('article_lister') }}">Retour à la liste</a>
+     {% block sidebar %}
+        <aside class="sidebar">
+            <div>
+                <h3>Note de rédaction</h3>
+                <h5> Mise en forme </h5>
+                <p>La mise en forme est réalisée directement dans le module de saisie et sera conservée en l'état dans la base de données</p>
+                <h5> Conseils </h5>
+                <p>Ne pas surcharger le texte (couleurs, images, effets, etc) ce qui rendrait le texte peu lisible.</p>
+                <h5>Galerie d'images</h5>
+                <p>Il est possible de constituer une galerie d'images associées à l'article qui sera mise en ligne à la suite de l'article</p>
+                <p>Il est possible d'insérer directement des images dans le texte mais il est recommandé d'en limiter l'usage </p>
+            </div>
+            <hr>
+            <div>
+                <a href="{{ path('article_lister') }}" class="formulaire-titre">Retour à la liste</a>
+            </div>
+            
+        </aside>
+    {% endblock %}
+
+    {% block footer %}
+    	{% include "includes/_footer.html.twig" %}
+    {% endblock %}
 {% endblock %}

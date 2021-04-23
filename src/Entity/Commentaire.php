@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 /* Extensions */
 use Gedmo\Mapping\Annotation as Gedmo;
+/** Validation Assert */
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CommentaireRepository::class)
@@ -59,6 +61,12 @@ class Commentaire
      */
     private $reponses;
 
+    /**
+     * @Assert\NotBlank
+     * @ORM\Column(type="boolean")
+     */
+    private $rgpd;
+
     public function __construct()
     {
         $this->reponses = new ArrayCollection();
@@ -98,14 +106,12 @@ class Commentaire
         return $this->publierAt;
     }
 
-    /*
     public function setPublierAt(\DateTimeInterface $publierAt): self
     {
         $this->publierAt = $publierAt;
 
         return $this;
     }
-    */
 
     public function getAuteur(): ?User
     {
@@ -182,6 +188,18 @@ class Commentaire
                 $reponse->setParent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRgpd(): ?bool
+    {
+        return $this->rgpd;
+    }
+
+    public function setRgpd(bool $rgpd): self
+    {
+        $this->rgpd = $rgpd;
 
         return $this;
     }

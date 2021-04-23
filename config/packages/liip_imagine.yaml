@@ -19,7 +19,7 @@ liip_imagine:
             quality: 75
             filters:
                 scale:
-                    dim: [300, 300]           
+                    dim: [300, 200]           
                     
         vignette:
             quality: 75
@@ -28,7 +28,15 @@ liip_imagine:
                     min: [150, 100]
                 thumbnail:
                     size: [150,100]
-                    
+
+        mini:
+            quality: 75
+            filters:
+                upscale:
+                    min: [60, 60]
+                thumbnail:
+                    size: [60,60]  
+
         logo:
             quality: 75
             filters:

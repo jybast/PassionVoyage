@@ -1,0 +1,11 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Nouvelle actualité{% endblock %}
+
+{% block body %}
+    <h1>Nouvelle actualité</h1>
+
+    {{ include('admin/actualite/_form.html.twig') }}
+
+    <a href="{{ path('admin_actualite_lister') }}">Retour à la liste</a>
+{% endblock %}

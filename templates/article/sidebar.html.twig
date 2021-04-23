@@ -1,0 +1,70 @@
+
+        {#-- Liste de menus -- #}
+        {#-- Button trigger modale contact-auteur --  #} 
+
+        <button type="button" class="formulaire-bouton btn-info" data-bs-toggle="modal" data-bs-target="#contact-auteur">
+                Contacter l'auteur
+        </button>
+        <hr>
+      
+        <div>
+            <a href="{{ path('article_lister') }}" class="formulaire-titre">Retour à la liste</a>
+        </div>
+        <hr>
+        {% if is_granted('ROLE_AUTEUR') %}
+        <div>
+            <a href="{{ path('article_modifier', {'id': article.id}) }}" class="formulaire-titre">Modifier l'article</a>
+        </div> 
+        <div>
+            {{ include('article/_delete_form.html.twig') }}
+        </div>
+		{% endif %}
+        <hr>
+        {#-- Montrer la catégorie--#}
+        <h2 class="formulaire-titre">Catégorie</h2>
+        {% for categorie in article.categorie %}
+           <p> {{categorie.nom}}</p>
+        {% endfor %}
+        {# ----- traitement des commentaires -----#}
+        <div>
+            <hr>
+            <h2 class="formulaire-titre">Liste des commentaires</h2>
+            {% for commentaire in article.commentaire %}
+                {# si parent est null c'est un commentaire de premier niveau#}
+                {% if commentaire.parent == null %}
+                    {# si le commentaire est validé #}
+                    {% if commentaire.valide == true %}
+                        <hr>
+                        <p> Publié par {{commentaire.auteur.pseudo}} le {{ commentaire.publierAt | date('d/m/Y à H:i') }}</p>
+                        <div class="">{{ commentaire.contenu | raw}}</p>
+                        {# bouton pour répondre #}
+                        <p><a href="#ajout-commentaire" data-reply data-id="{{commentaire.id}}" class="formulaire-bouton btn-info">Répondre</a></p>
+ 
+                        {# On affiche les réponses #}
+						{% for reponse in commentaire.reponses %}
+                            {% if reponse.valide == true %}
+                                <p>Réponse publiée par {{app.user.prenom}} le {{reponse.publierAt|date("d/m/Y H:i") }}</p>
+							    <div class="">{{reponse.contenu|raw}}</p>
+                            {% endif %}
+						{% endfor %}
+
+                    {% endif %}
+                {% endif %}
+            {# si pas encore de commentaire #}               
+            {% else %}
+                <p> Soyez le premier à déposer un commentaire </p>    
+            {% endfor %}
+        </div>
+        {#  -- Ajouter un commentaire --  #}
+        <div id="ajout-commentaire">
+            <hr>
+            <h2 class="formulaire-titre">Ajouter un commentaire</h2>
+            <p>Vous êtes {{ app.user.prenom}} {{ app.user.nom}}</p>
+            {{ form(commentForm)}}
+        </div>
+
+        <hr>
+       
+    {{ include('includes/_modal-contact-auteur.html.twig')}}
+     
+			

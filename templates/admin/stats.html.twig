@@ -1,0 +1,29 @@
+{#  
+    templates/admin/categorie/stats.html.twig
+    controller: AdminController::stats()
+#}
+
+{% extends 'admin.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="categorie" data-nom = {{ catNom }} data-count = {{ catCount }} data-couleur = {{ catCouleur }} width="400" height="100"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="article" data-dates = {{ dates }} data-count = {{ articleCount }}  width="400" height="100"></canvas>
+        </div
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js" integrity="sha512-BqNYFBAzGfZDnIWSAEGZSD/QFKeVxms2dIBPfw11gZubWwKUjEgmFUtUls8vZ6xTRZN/jaXGHD/ZaxD9+fDo0A==" crossorigin="anonymous"></script>
+
+    <script src="{{ asset('assets/js/statistiques.js')}}"></script>
+{% endblock %}

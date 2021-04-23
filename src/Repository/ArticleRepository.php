@@ -19,6 +19,41 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
+    /**
+     * @return Article[] Returns an array of Article objects
+     */
+ 
+    public function findByValide($value, $limite)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.valide = :valide')
+            ->setParameter('valide', $value)
+            ->orderBy('a.publierAt', 'desc')
+            ->setMaxResults($limite)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+    /**
+     * Retourne les articles publiés par date de publication
+     *
+     * @param [type] $value
+     * @return void
+     */
+    public function articlesParDate($value)
+    {
+        $query = $this->createQueryBuilder('a')
+            ->select('SUBSTRING(a.publierAt, 1, 10) as articleDate')
+            ->addSelect('COUNT(a) as count')
+            ->groupBy('articleDate')
+            ->andWhere('a.valide = :valide')
+            ->setParameter('valide', $value)
+        ;
+
+        return $query->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Article[] Returns an array of Article objects
     //  */

@@ -33,6 +33,15 @@ class Media
      */
     private $article;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Actualite::class, mappedBy="image", cascade={"persist", "remove"})
+     */
+    private $actualite;
+
+    public function __toString(){
+        return $this->nom;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +79,28 @@ class Media
     public function setArticle(?Article $article): self
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function getActualite(): ?Actualite
+    {
+        return $this->actualite;
+    }
+
+    public function setActualite(?Actualite $actualite): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($actualite === null && $this->actualite !== null) {
+            $this->actualite->setImage(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($actualite !== null && $actualite->getImage() !== $this) {
+            $actualite->setImage($this);
+        }
+
+        $this->actualite = $actualite;
 
         return $this;
     }

@@ -1,0 +1,18 @@
+{{ form_start(form) }}
+    {{ form_row(form.nom, {
+        label: 'Nom de la catégorie fille', 
+        label_attr: {class: 'formulaire-label'},
+        attr: { class: 'formulaire-input'}
+     }) }}
+     {{ form_row(form.couleur, {
+        label: 'Couleur de la catégorie', 
+        label_attr: {class: 'formulaire-label'},
+        attr: { class: 'formulaire-input'}
+     }) }}     
+    {{ form_row(form.parent, {
+        label: 'Nom de la catégorie mére', 
+        label_attr: {class: 'formulaire-label'},
+        attr: {class: 'formulaire-input'}
+    }) }}
+    <button class="formulaire-bouton btn-info">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

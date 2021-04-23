@@ -1,0 +1,35 @@
+		{# -- Modale -- #}
+        <div class="modal fade" id="contact-auteur" tabindex="-1" aria-labelledby="contactLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Contacter l'auteur</h5>
+                        <button type="button" class="formulaire-bouton btn-info" data-bs-dismiss="modal">Fermer</button>
+                    </div>
+                    {#   -- formulaire e-mail  -- #}
+                   
+                    <div class="modal-body"> 
+                    {{form_start(form)}}
+                        {{form_widget(form.titre)}}
+                        {{form_row(form.email, {
+                            label: 'Indiquer votre adresse e-mail ', 
+                            label_attr: {class: 'formulaire-label'},
+                            attr: { class: 'formulaire-input'}
+                            } ) }}
+                        {{form_row(form.message, {
+                            label: 'Rédiger votre message ici', 
+                            label_attr: {class: 'formulaire-label'},
+                            attr: { class: 'formulaire-input'}
+                            } ) }}
+                    {{ form_end(form)}}
+                    </div> 
+                    <div class="modal-footer">
+                              <p class="text-small text-muted texte-italique">En vous remerciant de votre participation.</p>
+
+                    </div>
+                    {#   -- fin du formulaire e-mail  -- #}
+                </div>
+            </div>
+        </div>
+        {# -- fin Modale -- #}
+

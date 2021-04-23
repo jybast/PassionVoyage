@@ -1,54 +1,89 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Article{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/polaroid.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Article</h1>
+    {% block header %}
+		<header class="header">
+			<div class="titre">
+				<h1 class="header-titre">Passion Voyage</h1>
+				<h2 class="header-caption">
+					Partager nos voyages en famille.</h2>
+			</div>
+			{% block navigation %}
+				{% include "includes/_menu.html.twig" %}
+			{% endblock %}
+		</header>
+	{% endblock %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ article.titre }}</td>
-            </tr>
-            <tr>
-                <th>Legende</th>
-                <td>{{ article.legende }}</td>
-            </tr>
-            <tr>
-                <th>Slug</th>
-                <td>{{ article.slug }}</td>
-            </tr>
-            <tr>
-                <th>Sommaire</th>
-                <td>{{ article.sommaire }}</td>
-            </tr>
-            <tr>
-                <th>Contenu</th>
-                <td>{{ article.contenu }}</td>
-            </tr>
-            <tr>
-                <th>Valide</th>
-                <td>{{ article.valide ? 'Oui' : 'Non' }}</td>
-            </tr>
-            <tr>
-                <th>PublierAt</th>
-                <td>{{ article.publierAt ? article.publierAt|date('d/m/Y') : '' }}</td>
-            </tr>
-            <tr>
-                <th>ModifierAt</th>
-                <td>{{ article.modifierAt ? article.modifierAt|date('d/m/Y') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+    {% block main %}
+       	<div class="main">
+			<div class="container">
+                {% for message in app.flashes('message') %}
+                    <div class="texte-message">{{ message }}</div>
+                {% endfor %}
+                {# Afficher les images #}
+               
 
-    <a href="{{ path('article_lister') }}">Retour à la liste</a>
+                {#  Fin bloc images#}
+                {# ---------- Afficher l'article ------------- #}
+                <h1 class="article-titre">{{ article.titre | raw}}</h1>
+                <span><i> Par {{ article.auteur.prenom }} {{ article.auteur.nom }}</i></span>
+                <h2 class="">{{ article.legende | raw}}</h2>
+                <hr>
+                {{ article.sommaire | raw }}
+                <hr>
+                {{ article.contenu | raw }}
+                <hr>
+                <i>Article publié le : {{ article.publierAt ? article.publierAt|date('d/m/Y') : '' }}</i>
+                <i> Dernière mise à jour le :{{ article.modifierAt ? article.modifierAt|date('d/m/Y') : '' }} </i>
+                {# ------------ Fin bloc article --------------- #}
+                {# Afficher les images #}
+                    <div class="fond-titre">
+                    <div class ="container">
+                    <h1 class = "article-titre">{{ article.titre}}</h1>   
+                        <ul class="gallery">
+                            {% for image in article.media %}
+                                <li><a href="" class="pic-{{image.id - 1}}"><img src="{{ asset('uploads/images/'~ image.nom) | imagine_filter('photo_article') }}" alt="{{ article.slug}}" title="{{ article.titre}}"></a></li>
+                            {% endfor %}
+       
+                        </ul>
+                    </div>
+		        </div>
+                {#  Fin bloc images#}
 
-    <a href="{{ path('article_modifier', {'id': article.id}) }}">Modifier</a>
+            </div>
+        </div>
+        
+    {% endblock %}
 
-    {{ include('article/_delete_form.html.twig') }}
+    {% block sidebar %}
+	<aside class="sidebar">
+        {% include "article/sidebar.html.twig" %}
+    </aside>
+    {% endblock %}
+   
+    <!-- ######### Bas de page ########### -->
+    {% block footer %}
+        {% include "includes/_footer.html.twig" %}
+    {% endblock %}
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    window.onload = () => {
+    document.querySelector("#article_contact_titre").value = "{{article.titre | raw}}"
+
+    // traitement pour les réponses aux commentaires
+    document.querySelectorAll("[data-reply]").forEach(element => {
+            element.addEventListener("click", function(){
+                document.querySelector("#commentaire_parentId").value = this.dataset.id;
+            });
+        });
+    }
+</script>
+	
 {% endblock %}

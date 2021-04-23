@@ -1,0 +1,25 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Actualités{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-3">
+    
+
+    <a href="{{ path('admin_actualite_lister') }}">Retour à la liste</a>
+    <hr>
+    {{ include('admin/actualite/_delete_form.html.twig') }}
+    </div>
+    <div class="col-md-9">
+    <h1 class="article-titre">Modifier une actualité</h1>
+        {{ include('admin/actualite/_form.html.twig', {'button_label': 'Modifier'}) }}
+    
+    </div>
+</div>
+    
+{% endblock %}
+
+{% block javascripts %}
+ 
+{% endblock %}
