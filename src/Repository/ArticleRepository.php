@@ -54,6 +54,27 @@ class ArticleRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+     /**
+     * Retourne les articles publiés pour une année
+     *
+     * @param [type] $value
+     * @return void
+     */
+    public function articlesParAnnee($value)
+    {
+        $query = $this->createQueryBuilder('a')
+            ->select('a')
+            ->addSelect('SUBSTRING(a.publierAt, 1, 4) as articleDate')
+            ->addSelect('COUNT(a) as count')
+            ->groupBy('articleDate')
+            ->andWhere('a.valide = :valide')
+            ->setParameter('valide', true)
+            ->andWhere('SUBSTRING(a.publierAt, 1, 4) = :annee ')
+            ->setParameter('annee', $value)
+        ;
+
+        return $query->getQuery()->getResult();
+    }
     // /**
     //  * @return Article[] Returns an array of Article objects
     //  */

@@ -24,9 +24,10 @@ class AdminController extends AbstractController
         // Cherche tous les utilisateurs
         $users = $userRepository->findAll();
         $articles = $articleRepository->findBy(['valide' => true],['publierAt' => 'desc']);
-
+       
         return $this->render('admin/dashboard.html.twig', [
             'membres' => count($users),
+            'articles' => count($articles)
         ]);
     }
 
