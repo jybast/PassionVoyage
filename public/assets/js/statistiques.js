@@ -18,7 +18,7 @@ window.onload = () => {
    var categorieChart = new Chart(categorie, {
 
        type: 'pie',
-       
+  
        data: {
            labels: nom,
            datasets: [{
@@ -29,21 +29,15 @@ window.onload = () => {
                borderWidth: 1
            }]
        },
-       options: {
-           scales: {
-               y: {
-                   beginAtZero: true
-               }
-           }
-       }
+      
    });
 
    // on identifie la balise à traiter
    let article = document.querySelector('#article')
    // on récupère les données passées en dataset
-   let dates = JSON.parse(article.dataset.dates);
-   let articleCount = article.dataset.articleCount;
-   alert(dates)
+   let articleDates = JSON.parse(article.dataset.dates);
+   let articleCount = JSON.parse(article.dataset.count);
+
    // lier le contexte au noeud canvas
    // Contruction du graph 
    let articleChart = new Chart(article, {
@@ -51,10 +45,13 @@ window.onload = () => {
        type: 'line',
        
        data: {
-           labels: dates,
+           labels: articleDates,
            datasets: [{
-               label: 'Articles par jours',
-               data: articleCount,
+                label: 'Articles par jours',
+                data: articleCount,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
            }]
        },
        options: {

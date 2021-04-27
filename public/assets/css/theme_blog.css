@@ -356,3 +356,38 @@
 .fond-gris{
     background-color: rgb(223, 222, 222);
 }
+
+.image-ronde {
+    overflow:hidden;
+    -webkit-border-radius:50px;
+    -moz-border-radius:50px;
+    border-radius:50px;
+    width: 120px;
+    height: 120px;
+    margin: auto;
+    text-align: center;
+}
+
+.image-arrondie {
+    margin: 10px;
+    border-radius:10px;
+    background-color:#666;
+    width: 140px;
+    height: 120px;
+    margin: auto;
+    padding:3px;
+}
+
+.image-arrondie:hover{
+    box-shadow: 10px 10px #bfbfbf;
+}
+
+.image-90{
+    margin: 10px;
+    transform: rotate(90deg);
+}
+
+.image-180{
+    margin: 10px;
+    transform: rotate(180deg);
+}
