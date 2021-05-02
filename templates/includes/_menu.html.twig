@@ -34,7 +34,7 @@
 					</li>
 					{% if is_granted('ROLE_USER') %}
 					<li class="nav-item">
-						<a class="nav-menu" href="{{ path('profilUser', {id : app.user.id}) }}" tabindex="-1" aria-disabled="true">Mon profil</a>
+						<a class="nav-menu" href="{{ path('user_profilUser', {id : app.user.id}) }}" tabindex="-1" aria-disabled="true">Mon profil</a>
 					</li>
 					{% endif %}
 					{% if is_granted('ROLE_ADMIN') %}

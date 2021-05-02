@@ -9,51 +9,20 @@ use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-#[Route('/user')]
+#[Route('/user', name:'user_')]
 class UserController extends AbstractController
 {
-    #[Route('/', name: 'listerUser', methods: ['GET'])]
-    public function listerUser(UserRepository $userRepository): Response
-    {
-        return $this->render('user/listerUser.html.twig', [
-            'users' => $userRepository->findBy(['isVerified' => true],['nom' => 'desc']),
-        ]);
-    }
-
-    #[Route('/ajouter', name: 'ajouterUser', methods: ['GET', 'POST'])]
-    public function ajouterUser(Request $request): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('listerUser');
-        }
-
-        return $this->render('user/ajouterUser.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
-    }
-
+  
     #[Route('/{id}', name: 'profilUser', methods: ['GET'])]
     public function profilUser(User $user): Response
     {
         // On recherche les données associées au compte
         $articles = $user->getArticles();
         $commentaires = $user->getCommentaires();
-
-      
-      
-      
 
         return $this->render('user/profilUser.html.twig', [
             'user' => $user,
@@ -66,7 +35,7 @@ class UserController extends AbstractController
     /**
      * Modifier le profil de l'utilisateur connecté
      * 
-     * @Route("/user/profil/modifier", name="user_profil_modifier")
+     * @Route("/user/profil/modifier", name="profil_modifier")
      *
      * @param Request $request
      * @return Response
@@ -116,23 +85,6 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-
-
-    #[Route('/supprimer/{id}', name: 'supprimerUser', methods: ['DELETE'])]
-    public function supprimerUser(Request $request, User $user): Response
-    {
-
-        dd($user);
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_accueil');
-    }
-
  
     /**
      * Permet de modifier le mot de passe de l'utilisateur connecté

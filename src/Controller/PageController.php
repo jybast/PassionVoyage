@@ -44,6 +44,7 @@ class PageController extends AbstractController
      */
     public function apropos(): Response
     {
+        
         return $this->render('page/apropos.html.twig', [
             'controller_name' => 'PageController',
         ]);

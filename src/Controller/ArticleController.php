@@ -11,6 +11,7 @@ use App\Entity\Commentaire;
 use App\Form\CommentaireType;
 use App\Form\ArticleContactType;
 use App\Repository\ArticleRepository;
+use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
@@ -217,6 +218,7 @@ class ArticleController extends AbstractController
      */
     public function modifier(Request $request, Article $article): Response
     {
+        //$annee = date_format($article->getPublierAt(),'Y');
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
@@ -225,8 +227,15 @@ class ArticleController extends AbstractController
             $images = $form->get('images')->getData();
             // on boucle sur les images
             foreach($images as $image){
+                // nom de fichier avec l'année 
+                $fichier = date_format($article->getPublierAt(),'Y').'-'.uniqid().'.'.$image->guessExtension();
+                // taille de l'image
+                $size = getImagesize($image);
+                $poids = (filesize($image)).' octets';
+
+                dd($poids);
                 // on génère un nom de fichier image unique
-                $fichier = md5(uniqid()).'.'.$image->guessExtension();
+                //$fichier = md5(uniqid()).'.'.$image->guessExtension();
                 // on copie l'image physique dans le dossier uploads
                 $image->move(
                     $this->getParameter('images_directory'), // c'est la destination

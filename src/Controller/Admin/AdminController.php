@@ -2,21 +2,24 @@
 
 namespace App\Controller\Admin;
 
+use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
-use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
+ * @IsGranted("ROLE_ADMIN", message="Vous n'êtes pas autorisé à consulter cette page !")
  * @Route("/admin", name="admin_")
  */
 class AdminController extends AbstractController
 {
     /**
-    * @Route("/", name="dashboard")
-    */
+     * 
+     * @Route("/", name="dashboard")
+     */
     public function dashboard(
         UserRepository $userRepository,
         ArticleRepository $articleRepository): Response

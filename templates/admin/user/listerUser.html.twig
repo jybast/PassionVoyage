@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin.html.twig' %}
 
 {% block title %}Liste des membres{% endblock %}
 
@@ -37,8 +37,8 @@
                 <td>{{ user.telephone }}</td>
                 <td>{{ user.isVerified ? 'Oui' : 'Non' }}</td>
                 <td>
-                    <a href="{{ path('user_profilUser', {'id': user.id}) }}">Voir le profil</a>
-                    <a href="{{ path('user_editerProfil', {'id': user.id}) }}">Editer le profil</a>
+                    <a href="{{ path('admin_user_profilUser', {'id': user.id}) }}">Voir le profil</a>
+                    <a href="{{ path('admin_user_profil_editer', {'id': user.id}) }}">Editer le profil</a>
                 </td>
             </tr>
         {% else %}
@@ -49,5 +49,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('user_ajouterUser') }}">Ajouter un utilisateur</a>
+    <a href="{{ path('admin_user_ajouterUser') }}">Ajouter un utilisateur</a>
 {% endblock %}

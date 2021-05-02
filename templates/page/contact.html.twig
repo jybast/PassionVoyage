@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Contact{% endblock %}
-
+{% block stylesheets %}
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" 
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin="">
+{% endblock %}
 {% block body %}
 	{% block header %}
 		<header class="header">
@@ -22,23 +26,28 @@
 				<a href="{{ path('app_accueil') }}" class="formulaire-label">Retour à la page d'accueil</a>
 					<div class="formulaire-masque">
 					
-					{% for message in app.Flashes('message')  %}
-						<div class="p-3 my-2 rounded-2 success">{{ message }} </div>
-					{% endfor %}
-					
-					<h1 class="formulaire-titre">Nous contacter</h1>
-					
-					{{ form(form) }}
+						{% for message in app.Flashes('message')  %}
+							<div class="p-3 my-2 rounded-2 success">{{ message }} </div>
+						{% endfor %}
+						
+						<h1 class="formulaire-titre">Nous contacter</h1>
+						
+						{{ form(form) }}
 					</div>
 				</div >
 				
 			</div>
 		</div>
 	{% endblock %}
-
-	{% block sidebar %}
+{% block sidebar %}
 		<aside class="sidebar">
-			Carte de localisation
+			<div class="container">
+				<div class="formulaire-titre texte-centre">
+					Nous sommes d'ici
+				</div>
+			</div>
+			
+			<div id="carteContact"></div>
 		</aside>
 	{% endblock %}
 
@@ -46,4 +55,12 @@
         {% block footer %}
             {% include "includes/_footer.html.twig" %}
          {% endblock %}
+{% endblock %}
+{% block javascripts %}
+	<!-- Après avoir installé le Leaflet CSS -->
+ 	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+
+  <script src="{{ asset('assets/js/openStreetMap.js')}}"></script>
 {% endblock %}

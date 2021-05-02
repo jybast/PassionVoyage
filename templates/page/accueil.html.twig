@@ -62,12 +62,12 @@
 						<div class="card" style="width: 18rem;">
 							<img src="{{ asset('uploads/images/'~ article.media[0].nom) | imagine_filter('photo_article') }}" class="card-img-top mt-2" alt="Photo article">
 							<div class="card-header">
-								{{article.titre}}
+								{{ article.publierAt | date('Y')}} - {{article.titre}}
 							</div>
 							<div class="card-body">
-								<h5 class="card-title">{{ article.titre}}</h5>
+								<h5 class="formulaire-titre">{{ article.titre}}</h5>
 								<h6 class="card-subtitle mb-2 text-muted">{{ article.legende}}</h6>
-								<p class="card-text">{{ article.sommaire | raw}}</p>
+								<div class="texte-normal">{{ article.sommaire | raw}}</div>
 								<a href="{{ path('article_afficher', {slug : article.slug})}}" class="formulaire-bouton btn-info">Lire l'article </a>
 							</div>
 							<div class="card-footer text-muted">
@@ -98,69 +98,67 @@
 	<aside class="sidebar">
 		<div class="row">
 			<h1 class="formulaire-titre"> Qui sommes nous ?</h1>
-			<p class="texte-normal texte-centre"> <img src="{{ asset('assets/img/desert.jpg') }}" alt="Mon logo" width="250px"></p>
-			<p class="texte-normal">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis, similique facere cumque illo placeat dicta pariatur excepturi veniam praesentium iusto cum doloremque, sed maxime sequi incidunt aperiam asperiores odio corporis!</p>
+			<div>
+			<p class="texte-normal">Bonjour et bienvenue.</p>
+			<p class="texte-normal">Nous vous proposons de partager nos impressions sur les voyages que nous avons effectués, et livrer nos conseils et astuces pour éviter, peut-être, de refaire nos erreurs.</p>
+			<figure >
+				<img src="{{ asset('assets/img/onpart.jpg') | imagine_filter('photo_article')}}" alt="onpart">
+				
+			</figure>
+			<p class="texte-normal texte-centre"><i>Toujours prêts à prendre la route</i></p>
+			</div>
 		</div>
 		
 		<div class="row">
-			<h1 class="formulaire-titre"> Entrer dans la danse</h1>
-			<p class="texte-normal texte-centre"> 
-			<a href="{{ path('app_register') }}" > <button type="submit" class="formulaire-bouton btn-info">S'inscrire</button></a>
-			</p>
-			<p class="texte-normal">
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis, similique facere cumque illo placeat dicta pariatur excepturi veniam praesentium iusto cum doloremque, sed maxime sequi incidunt aperiam asperiores odio corporis!
-			</p>
+			<h1 class="formulaire-titre"> Pourquoi nous suivre?</h1>
+			<p class="texte-normal"> Nous espérons vous faire découvrir certains lieux et vous révéler nos petits serets et astuces.
+			<br>
+			Si l'aventure vous tente, nous serons heureux de vous faire entrer dans notre cercle et vous permettre de participer encore plus à nos activités.
+			<br>
+			<br>
+			Avec le bouton 'Sinscrire' juste en dessous, vous allez nous rejoindre en toute confidentialité et respect de vos données personnelles que nous nous engageons à conserver uniquement pour les besoins de fonctionnement du site.</p>
 			<p class="texte-normal texte-centre">
 				Lire notre politique de confidentialité :
-			
 			<!-- Button trigger modal -->
 			<button type="button" class="formulaire-bouton btn-info" data-bs-toggle="modal" data-bs-target="#rgpd">
-			Gestion des données
+			<i>Notre gestion des données personnelles</i>
 			</button>
-			<p>
-		</div>
-		<div class="row">
-			<h1 class="formulaire-titre"> Pourquoi nous suivre?</h1>
-			<p class="texte-normal"> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis, similique facere cumque illo placeat dicta pariatur excepturi veniam praesentium iusto cum doloremque, sed maxime sequi incidunt aperiam asperiores odio corporis!
 			</p>
-			
-			
+			<p class="texte-normal texte-centre">
+			<a href="{{ path('app_register') }}" > <button type="submit" class="formulaire-bouton btn-info">S'inscrire</button></a>
+			</p>
 
-				<!-- Modal -->
-				<div class="modal fade" id="rgpd" tabindex="-1" aria-labelledby="rgpdlLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">Gestion des données personnelles</h5>
-								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-							</div>
-							<div class="modal-body">
-							<p class="texte-normal"> Vous pouvez consulter les données vous concernant en vous connectant avec vos identifiants et ouvrir le lien "Mon profil".</p>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="rgpd" tabindex="-1" aria-labelledby="rgpdlLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Gestion des données personnelles</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+					<p class="texte-normal"> Vous pouvez consulter les données vous concernant en vous connectant avec vos identifiants et ouvrir le lien "Mon profil".</p>
 
-							<p class="texte-normal"> Les informations recueillies sur ce site sont enregistrées dans un fichier informatisé par l'administrateur responsable du site pour la gestion des membres inscrits et de leurs activités sur le site.
+					<p class="texte-normal"> Les informations recueillies sur ce site sont enregistrées dans un fichier informatisé par l'administrateur responsable du site pour la gestion des membres inscrits et de leurs activités sur le site.
 
-							Les données collectées seront accessibles et communiquées aux seules personnes inscrites.</p>
+					Les données collectées seront accessibles et communiquées aux seules personnes inscrites.</p>
 
-							<p class="texte-normal">Les données sont conservées pendant la durée de validité de l'inscription. Les données personnelles et les informations y étant attachées seront supprimées quand l'utilisateur décide de ne plus être inscrit sur le site.</p>
+					<p class="texte-normal">Les données sont conservées pendant la durée de validité de l'inscription. Les données personnelles et les informations y étant attachées seront supprimées quand l'utilisateur décide de ne plus être inscrit sur le site.</p>
 
-							<p class="texte-normal">Vous pouvez accéder aux données vous concernant, les rectifier, demander leur effacement. Vous pouvez retirer à tout moment votre consentement au traitement de vos données.</p>
+					<p class="texte-normal">Vous pouvez accéder aux données vous concernant, les rectifier, demander leur effacement. Vous pouvez retirer à tout moment votre consentement au traitement de vos données.</p>
 
-							<p class="texte-normal">Consultez le site cnil.fr pour plus d’informations sur vos droits.
+					<p class="texte-normal">Consultez le site cnil.fr pour plus d’informations sur vos droits.
 
-							Pour exercer ces droits ou pour toute question sur le traitement de vos données par le site, vous pouvez contacter l'administrateur responsable du site : [admin@passion-voyage.org] </p>
-
-
-
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="formulaire-bouton btn-info" data-bs-dismiss="modal">Fermer</button>
-							</div>
-						</div>
+					Pour exercer ces droits ou pour toute question sur le traitement de vos données par le site, vous pouvez contacter l'administrateur responsable du site : [admin@passion-voyage.org] </p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="formulaire-bouton btn-info" data-bs-dismiss="modal">Fermer</button>
 					</div>
 				</div>
-
-
+			</div>
 		</div>
+
 	</aside>
 {% endblock %}
 

@@ -1,0 +1,74 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Profil de : {{ user.prenom }} {{ user.nom }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="formulaire-titre">Vos articles</h3>
+                <p class="texte-normal" >Vous avez rédigé {{ articles | length }} article(s). 
+                {% for article in articles %}
+                    <p class="texte-normal"> Titre : {{ article.titre }} </p>
+                {% endfor %}
+                <h3 class="formulaire-titre">Vos commentaires</h3>
+                <p class="texte-normal">Vous avez publié {{ commentaires | length }} commentaire(s). 
+                {% for commentaire in commentaires %}
+                    <div class="texte-normal"> Titre : {{ commentaire.contenu | raw }} </div>
+                {% endfor %}        
+            </div>
+            <div class="col-md-8">
+                <h1 class="formulaire-titre">Profil de : {{ user.prenom }} {{ user.nom }} </h1>
+                    <table class="table">
+                        <tbody>
+                        <tr class="texte-normal">
+                            <th >Nom</th>
+                            <td>{{ user.nom  }}</td>
+                        </tr>
+                        <tr class="texte-normal">
+                            <th>Prenom</th>
+                            <td>{{ user.prenom }}</td>
+                        </tr>
+                        <tr class="texte-normal">
+                            <th>Pseudo</th>
+                            <td>{{ user.pseudo }}</td>
+                        </tr>
+                        <tr class="texte-normal">
+                            <th>Email</th>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr class="texte-normal">
+                            <th>Rôles</th>
+                            {% for role in user.roles %}
+                            <td>{{ role }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr class="texte-normal">
+                            <th>Adresse</th>
+                            <td>{{ user.adresse }}</td>
+                        </tr>
+                        <tr class="texte-normal">
+                            <th>Ville</th>
+                            <td>{{ user.ville }}</td>
+                        </tr>
+                        <tr class="texte-normal">
+                            <th>Code postal</th>
+                            <td>{{ user.cp }}</td>
+                        </tr>
+                        <tr class="texte-normal">
+                            <th>Téléphone</th>
+                            <td>{{ user.telephone }}</td>
+                        </tr>
+                        <tr class="texte-normal">
+                            <th>Membre actif</th>
+                            <td>{{ user.isVerified ? 'OUI' : 'NON'}}</td>
+                        </tr>
+                            
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+    {% include "includes/_footer.html.twig" %}
+
+{% endblock %}
