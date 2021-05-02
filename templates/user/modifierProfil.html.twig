@@ -47,12 +47,11 @@
         <p> Vous avez la possibilité de modifier les données </p>
         <p> Votre adresse mail est votre identifiant, vous ne pourrez pas la modifier </p>
         <div class="vertical-menu">
-            <a href="{{ path('user_profilUser', {'id': app.user.id}) }}" class="d-block formulaire-lien">Retour à votre profil</a>
+            <a href="{{ path('user_profil', {'id': app.user.id}) }}" class="d-block formulaire-lien">Retour à votre profil</a>
             <a href="{{ path('user_modifierPassword', {'id': app.user.id}) }}" class="d-block formulaire-lien">Modifier le mot passe</a>
             <a href="#" class="d-block formulaire-lien">Modifier mon avatar</a>
             <br>
-            <br>
-
+            {% include ('user/_delete_form.html.twig') %}
         </div> 
     </aside    
     {% endblock %}

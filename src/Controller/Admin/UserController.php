@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-#[Route('/user', name:'admin_user_')]
+#[Route('/admin/user', name:'admin_user_')]
 class UserController extends AbstractController
 {
     #[Route('/', name: '', methods: ['GET'])]

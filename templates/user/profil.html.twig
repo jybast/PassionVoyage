@@ -79,6 +79,9 @@
                         <p class="texte-normal" >Vous avez rédigé {{ articles | length }} article(s). 
                         {% for article in articles %}
                             <p class="texte-normal"> Titre : {{ article.titre }} </p>
+                            {% for image in article.media %}
+                                <img src="{{ asset('uploads/images/' ~ image.nom ) | imagine_filter('vignette')}}" alt="{{article.titre}}">
+                            {% endfor %}
                         {% endfor %}
                         
                     </div>
@@ -102,8 +105,11 @@
                 <a href="{{ path('user_profil_modifier', {'id': app.user.id}) }}" class="d-block formulaire-lien">Modifier le profil</a>
                 <a href="{{ path('user_modifierPassword', {'id': app.user.id}) }}" class="d-block formulaire-lien">Modifier le mot passe</a>
                 <a href="#" class="d-block formulaire-lien">Modifier mon avatar</a>
+                <a href="{{ path('user_data_download', {'id': app.user.id}) }}" class="d-block formulaire-lien">Télécharger mes données</a>
+
+                
                 <br>
-                <br>
+                 {% include ('user/_delete_form.html.twig') %}
             </div> 
         </aside>
     {% endblock %}

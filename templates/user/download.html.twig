@@ -1,0 +1,93 @@
+{% extends "pdf.html.twig" %}
+
+{% block title %} Données personnelles de {{app.user.prenom}} {{app.user.nom }}{% endblock %}
+
+{% block body %}
+<h1>Données personnelles de {{app.user.prenom}} {{app.user.nom }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr class="texte-normal">
+                <th >Nom</th>
+                <td>{{ app.user.nom  }}</td>
+            </tr>
+            <tr class="texte-normal">
+                <th>Prénom</th>
+                <td>{{ app.user.prenom }}</td>
+            </tr>
+            <tr class="texte-normal">
+                <th>Pseudo</th>
+                <td>{{ app.user.pseudo }}</td>
+            </tr>
+            <tr class="texte-normal">
+                <th>Email</th>
+                <td>{{ app.user.email }}</td>
+            </tr>
+            <tr class="texte-normal">
+                <th>Rôles</th>
+                {% if is_granted('ROLE_ADMIN') %}
+                <td>Administrateur</td>
+                {% elseif is_granted('ROLE_AUTEUR') %}
+                <td>Membre actif</td>
+                {% else %}
+                <td>Invité</td>
+                {% endif %}
+            </tr>
+            <tr class="texte-normal">
+                <th>Adresse</th>
+                <td>{{ app.user.adresse }}</td>
+            </tr>
+            <tr class="texte-normal">
+                <th>Ville</th>
+                <td>{{ app.user.ville }}</td>
+            </tr>
+            <tr class="texte-normal">
+                <th>Code postal</th>
+                <td>{{ app.user.cp }}</td>
+            </tr>
+            <tr class="texte-normal">
+                <th>Téléphone</th>
+                <td>{{ app.user.telephone }}</td>
+            </tr>
+            <tr class="texte-normal">
+                <th>Est validé</th>
+                <td>{{ app.user.isVerified ? 'Oui' : 'Non' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 class="formulaire-titre">Vos articles</h3>
+    <p class="texte-normal" >Vous avez rédigé {{ app.user.articles | length }} article(s). 
+    <table>
+        <thead>
+        
+        </thead>
+        <tbody>
+        
+        </tbody>
+    </table>
+                        {% for article in app.user.articles %}
+                            <p class="texte-normal"> Titre : {{ article.titre }} </p>
+                            <p class="texte-normal"> Sommaire : {{ article.legende }}</p>
+                            <p class="texte-normal"> Résumé : {{ article.sommaire | raw }}</p>
+                            <hr>
+                            <h2>Photos associées</h2>
+                            {% for image in article.media %}
+                                <img src="{{ asset('uploads/images/' ~ image.nom ) | imagine_filter('vignette')}}" alt="{{article.titre}}">
+                            {% endfor %}
+                            <p> Liens vers les fichiers </p>
+                            {% for image in article.media %}
+                                {{ absolute_url(asset('uploads/images/' ~ image.nom))}}
+                            {% endfor %}
+                            <hr>
+                        {% endfor %}
+
+                        <hr>
+                        <h3 class="formulaire-titre">Vos commentaires</h3>
+                        <p class="texte-normal">Vous avez publié {{ app.user.commentaires | length }} commentaire(s). 
+                        {% for commentaire in app.user.commentaires %}
+                            <p class="texte-normal"> Titre : {{ commentaire.contenu | raw }} </p>
+                            <p class="texte-normal"> Publié le : {{ commentaire.publierAt | date('d/m/Y h:i') | raw }} </p>
+                        {% endfor %}
+
+{% endblock %}
