@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\ChercheArticleType;
 use App\Form\ContactType;
 use App\Repository\ActualiteRepository;
 use App\Repository\ArticleRepository;
@@ -23,17 +24,38 @@ class PageController extends AbstractController
      *
      * @return Response
      */
-    public function accueil(ArticleRepository $articleRepository, ActualiteRepository $actualiteRepository): Response
+    public function accueil(
+        ArticleRepository $articleRepository, 
+        ActualiteRepository $actualiteRepository, 
+        Request $request): Response
     {
         // récupère les derniers articles publiés et valides
         //$articles = $articleRepository->findAll();
         $articles = $articleRepository->findByValide(true, 3);
          // récupère les trois dernières actualités publiées
         $actualites = $actualiteRepository->lastActu();
+        
+        // génère le formulaire de rcherhe fulltext
+        $form = $this->createForm(ChercheArticleType::class);
+        // gestion de la recherche
+        $recherche = $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            // recherche les articles correspondants aux mots clés
+            $articlesRecherche = $articleRepository->recherche(
+                $recherche->get('mots')->getData(),
+                $recherche->get('categorie')->getData()
+            );
+
+        } else {
+            $articlesRecherche = [];
+        }
 
         return $this->render('page/accueil.html.twig', [
             'articles' => $articles,
-            'actualites' => $actualites
+            'actualites' => $actualites,
+            'form' => $form->createView(),
+            'articlesRecherche' => $articlesRecherche
         ]);
     }
     

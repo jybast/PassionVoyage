@@ -75,22 +75,32 @@ class ArticleRepository extends ServiceEntityRepository
 
         return $query->getQuery()->getResult();
     }
-    // /**
-    //  * @return Article[] Returns an array of Article objects
-    //  */
-    /*
-    public function findByExampleField($value)
+
+    /**
+     * Recherche article en fonction du formulaire de recherche
+     * @param $mots
+     * @param $categorie
+     * 
+     */
+    public function recherche($mots = null, $categorie = null)
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $query = $this->createQueryBuilder('a');
+        $query->where('a.valide = 1');
+        
+        if($mots != null){
+            $query->andWhere('MATCH_AGAINST(a.titre, a.legende, a.sommaire, a.contenu) AGAINST(:mots boolean)>0 ')
+                ->setParameter('mots', $mots);
+        }
+        if($categorie != null){
+            // jointure sur la table Article avec la table Catégorie
+            $query->leftJoin('a.categorie', 'c');
+            $query->andWhere('c.id = :id')
+                ->setParameter('id', $categorie);
+        }
+
+        return $query->getQuery()->getResult();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Article

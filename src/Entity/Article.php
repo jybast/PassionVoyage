@@ -16,6 +16,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * 
+ * @ORM\Table(name="article", indexes={@ORM\Index(columns={"titre", "legende", "sommaire", "contenu"}, flags={"fulltext"})})
  */
 class Article
 {

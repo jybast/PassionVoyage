@@ -25,10 +25,7 @@
 						<h1 class="formulaire-titre">Bonjour  {{ (app.user) ? app.user.prenom : 'Cher visiteur' }} ✅</h1>
 					</div>
 					<div class="col-md-6">
-						<form class="d-flex">
-							<input class="form-control me-2" type="search" placeholder="Rechercher un article" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Rechercher</button>
-						</form>
+						<a class="formulaire-titre" href="{{ path('app_login')}}">Se connecter</a>
 					</div>
 				</div>
 				<hr>
@@ -37,6 +34,8 @@
 				{% for message in app.flashes('success') %}
 					<div class="alert alert-success" role="alert">{{ message }}</div>
 				{% endfor %}
+
+				{# ---------------Affiche les actualités du site --------------------------------#}
 				<div class="row">
 					<h1 class="formulaire-titre">Nos actualités</h1>
 					{% for actualite in actualites %}
@@ -54,7 +53,29 @@
 				</div>
 				<div class="row">
 					<hr>
+					{% if is_granted('ROLE_USER') %}
+						<div class="col-md-3">
+							<p class="text-muted"> Rechercher un article </p>
+						</div>
+						<div class="col-md-9">
+							{# --- Formulaire de recherche --- #}
+							{{ form_start(form, {attr: {class: 'd-flex'}} ) }}
+							<div class="form-control">
+							{{ form_label(form.mots, 'Entrer un ou plusieurs mots')}}
+							{{ form_widget(form.mots, {'attr':{'class': 'formulaire-input'}} )}}
+							</div>
+							<div class="form-control">
+							{{ form_label(form.categorie, 'Choisir une catégorie')}}
+							{{ form_widget(form.categorie)}}
+							</div>
+							<hr>
+							{{ form_end(form)}}
+
+						</div>
+						<hr>
+					{% endif %}
 				</div>
+				{# -----------------  Affiche les articles ---------------------------#}
 				<div class="row">
 					<h1 class="formulaire-titre">Articles récents</h1>
 
@@ -89,7 +110,31 @@
 				<div class="row">
 					<hr>
 				</div>
+				{# --------------------------------  Résultat de la recherche -------------------------#}
 
+				{% if articlesRecherche | length > 0 %}
+				<div class="row">
+					<h1 class="formulaire-titre">{{ articlesRecherche | length }} article(s) trouvé(s).</h1>
+						{% for item in articlesRecherche %}
+							<div class="card" style="width: 18rem;">
+								<img src="{{ asset('uploads/images/'~ item.media[0].nom) | imagine_filter('photo_article') }}" class="card-img-top mt-2" alt="Photo article">
+							<div class="card-header">
+								{{ item.publierAt | date('Y')}} - {{item.titre}}
+							</div>
+							<div class="card-body">
+								<h5 class="formulaire-titre">{{ item.titre}}</h5>
+								<h6 class="card-subtitle mb-2 text-muted">{{ item.legende}}</h6>
+								<div class="texte-normal">{{ item.sommaire | raw}}</div>
+								<a href="{{ path('article_afficher', {slug : item.slug})}}" class="formulaire-bouton btn-info">Lire l'article </a>
+							</div>
+							<div class="card-footer text-muted">
+								Publié le {{ item.publierAt | date('d/m/Y')}}
+							</div>
+							</div>
+						{% endfor %}
+				</div>	
+				{% endif %}
+				
 			</div>
 		</div>
 {% endblock %}

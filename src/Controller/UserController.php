@@ -142,7 +142,7 @@ class UserController extends AbstractController
         // On définit les options du PDF
         $pdfOptions = new Options();
         // Police par défaut
-        $pdfOptions->set('defaultFont', 'Arial');
+        $pdfOptions->set('defaultFont', 'cursive');
         // permet le téléchargement SSL
         $pdfOptions->setIsRemoteEnabled(true);
         // On instancie Dompdf
