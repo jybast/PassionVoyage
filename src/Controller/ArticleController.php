@@ -43,9 +43,9 @@ class ArticleController extends AbstractController
         $articles = $paginator->paginate(
             $data, // données à paginer
             $request->query->getInt('page', 1), // n° de page dans URL
-            6  // nombre par page
+            3  // nombre par page
         );
-       
+
         return $this->render('article/lister.html.twig', [
             'articles' => $articles
         ]);
@@ -233,7 +233,6 @@ class ArticleController extends AbstractController
                 $size = getImagesize($image);
                 $poids = (filesize($image)).' octets';
 
-                dd($poids);
                 // on génère un nom de fichier image unique
                 //$fichier = md5(uniqid()).'.'.$image->guessExtension();
                 // on copie l'image physique dans le dossier uploads

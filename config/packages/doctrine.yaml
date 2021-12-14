@@ -18,4 +18,5 @@ doctrine:
                 alias: App
         dql:
             string_functions:
+                # bibliothèque pour la gestion des recherches en FULLTEXT
                 MATCH_AGAINST: App\Extensions\Doctrine\MatchAgainst

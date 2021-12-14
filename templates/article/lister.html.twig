@@ -28,6 +28,7 @@
                         <div class="row g-0">
                             <div class="col-md-3 fond-gris">
                                 <div class="cadre-image">
+
                                     <img src="{{asset('uploads/images/'~ article.media[0].nom) | imagine_filter('vignette') }}" alt="{{ article.titre}}">
                                 </div>    
                                 <p class="card-text"><small class="text-muted">Publié le {{ article.publierAt ? article.publierAt|date('d/m/Y') : '' }}</small></p>

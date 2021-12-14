@@ -37,13 +37,14 @@
                         <hr>
                         <p> Publié par {{commentaire.auteur.pseudo}} le {{ commentaire.publierAt | date('d/m/Y à H:i') }}</p>
                         <div class="">{{ commentaire.contenu | raw}}</p>
+                        {% if is_granted("ROLE_USER") %}
                         {# bouton pour répondre #}
                         <p><a href="#ajout-commentaire" data-reply data-id="{{commentaire.id}}" class="formulaire-bouton btn-info">Répondre</a></p>
- 
+                        {% endif %}
                         {# On affiche les réponses #}
 						{% for reponse in commentaire.reponses %}
                             {% if reponse.valide == true %}
-                                <p>Réponse publiée par {{app.user.prenom}} le {{reponse.publierAt|date("d/m/Y H:i") }}</p>
+                                <p>Réponse publiée par {{commentaire.auteur.pseudo}} le {{reponse.publierAt|date("d/m/Y H:i") }}</p>
 							    <div class="">{{reponse.contenu|raw}}</p>
                             {% endif %}
 						{% endfor %}
@@ -52,17 +53,20 @@
                 {% endif %}
             {# si pas encore de commentaire #}               
             {% else %}
-                <p> Soyez le premier à déposer un commentaire </p>    
+                {% if is_granted("ROLE_USER") %}
+                <p> Soyez le premier à déposer un commentaire </p>  
+                 {% endif %}
             {% endfor %}
         </div>
         {#  -- Ajouter un commentaire --  #}
+        {% if is_granted("ROLE_USER") %}
         <div id="ajout-commentaire">
             <hr>
             <h2 class="formulaire-titre">Ajouter un commentaire</h2>
             <p>Vous êtes {{ app.user.prenom}} {{ app.user.nom}}</p>
             {{ form(commentForm)}}
         </div>
-
+        {% endif %}
         <hr>
        
     {{ include('includes/_modal-contact-auteur.html.twig')}}

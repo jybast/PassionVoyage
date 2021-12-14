@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conseil index{% endblock %}
+
+{% block body %}
+     {% block header %}
+
+		<header class="header">
+			<div class="titre">
+				<h1 class="header-titre">Passion Voyage</h1>
+				<h2 class="header-caption">
+					Partager nos voyages en famille.</h2>
+			</div>
+			{% block navigation %}
+				{% include "includes/_menu.html.twig" %}
+			{% endblock %}
+		</header>
+
+    {% endblock %}
+    {% block main %}
+        <div class="main">
+		    <div class="container">
+
+
+    <h1>Liste des fiches techniques</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Contenu</th>
+                <th>Publié le :</th>
+                <th>Modifié le :</th>
+                <th>Type</th>
+                <th>Domaine</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fiche in fiches %}
+            <tr>
+                <td>{{ fiche.id }}</td>
+                <td>{{ fiche.titre }}</td>
+                <td>{{ fiche.contenu | raw }}</td>
+                <td>{{ fiche.publierAt ? fiche.publierAt|date('d/m/Y') : '' }}</td>
+                <td>{{ fiche.modifierAt ? fiche.modifierAt|date('d/m/Y') : '' }}</td>
+                <td>{{ fiche.type }}</td>
+                <td>{{ fiche.domaine }}</td>
+                <td>
+                    <a href="{{ path('tag_show', {'id': fiche.id}) }}">Voir</a>
+                    <a href="{{ path('tag_edit', {'id': fiche.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucun tag trouvé pour cette rubrique.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('tag_new') }}">Créer un nouveau tag</a>
+            </div>
+    </div>
+    {% endblock %}
+
+    {% block sidebar %}
+        <aside class="sidebar">
+        
+            
+        </aside>
+    {% endblock %}
+
+    {% block footer %}
+
+	{% include "includes/_footer.html.twig" %}
+
+    {% endblock %}
+{% endblock %}

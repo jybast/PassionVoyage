@@ -25,13 +25,15 @@ class ArticleType extends AbstractType
         $builder
             ->add('titre', TextType::class)
             ->add('legende', TextType::class)
-            ->add('sommaire', CKEditorType::class, [
-                'config' => [ 'extraPlugins' => 'wordcount', ],
-                'plugins' => [
-                    'wordcount' => [
-                        'path'     => '/bundles/fosckeditor/plugins/wordcount/', 
-                        'filename' => 'plugin.js'],
-                ]])
+            ->add('sommaire', CKEditorType::class 
+            // [
+            //    'config' => [ 'extraPlugins' => 'wordcount', ],
+            //    'plugins' => [
+            //        'wordcount' => [
+            //            'path'     => '/bundles/fosckeditor/plugins/wordcount/', 
+            //            'filename' => 'plugin.js'],
+            //    ]]} 
+            )
             ->add('contenu', CKEditorType::class)
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,

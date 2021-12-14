@@ -27,10 +27,15 @@ security:
                 target: app_accueil
             
             form_login:
-                login_path: /login
-                check_path: /login
+                # "app_login" est le nom de la route donnée dans securityController
+                login_path: app_login
+                check_path: app_login
                 default_target_path: app_accueil
-
+                # enable_csrf: true
+                
+            # configure le nombre maximum de tentatives de connection (par minute)
+            #login_throttling:
+            #    max_attempts: 3
            
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

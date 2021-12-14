@@ -30,27 +30,28 @@ class PageController extends AbstractController
         Request $request): Response
     {
         // récupère les derniers articles publiés et valides
-        //$articles = $articleRepository->findAll();
         $articles = $articleRepository->findByValide(true, 3);
          // récupère les trois dernières actualités publiées
         $actualites = $actualiteRepository->lastActu();
         
-        // génère le formulaire de rcherhe fulltext
+        // génère le formulaire de recherhe fulltext
         $form = $this->createForm(ChercheArticleType::class);
         // gestion de la recherche
-        $recherche = $form->handleRequest($request);
+        $req = $form->handleRequest($request);
 
+		// Traitement du formulaire de recherche
         if($form->isSubmitted() && $form->isValid()){
             // recherche les articles correspondants aux mots clés
             $articlesRecherche = $articleRepository->recherche(
-                $recherche->get('mots')->getData(),
-                $recherche->get('categorie')->getData()
+                $req->get('mots')->getData(),
+                $req->get('categorie')->getData()
             );
 
         } else {
             $articlesRecherche = [];
         }
 
+		// Envoi des données à la vue
         return $this->render('page/accueil.html.twig', [
             'articles' => $articles,
             'actualites' => $actualites,

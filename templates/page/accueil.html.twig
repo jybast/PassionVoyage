@@ -18,6 +18,7 @@
 	{% endblock %}
 
 	{% block main %}
+		
 		<div class="main">
 			<div class="container">
 				<div class="row">
@@ -75,13 +76,41 @@
 						<hr>
 					{% endif %}
 				</div>
+
+				{# --------------------------------  Résultat de la recherche -------------------------#}
+
+				{% if articlesRecherche | length > 0 %}
+				<div class="row">
+					<h1 class="formulaire-titre">{{ articlesRecherche | length }} article(s) trouvé(s).</h1>
+						{% for item in articlesRecherche %}
+							<div class="card" style="width: 18rem;">
+								<img src="{{ asset('uploads/images/'~ item.media[0].nom) | imagine_filter('photo_article') }}" class="card-img-top mt-2" alt="Photo article">
+							<div class="card-header">
+								{{ item.publierAt | date('Y')}} - {{item.titre}}
+							</div>
+							<div class="card-body">
+								<h5 class="formulaire-titre">{{ item.titre}}</h5>
+								<h6 class="card-subtitle mb-2 text-muted">{{ item.legende}}</h6>
+								<div class="texte-normal">{{ item.sommaire | raw}}</div>
+								<a href="{{ path('article_afficher', {slug : item.slug})}}" class="formulaire-bouton btn-info">Lire l'article </a>
+							</div>
+							<div class="card-footer text-muted">
+								Publié le {{ item.publierAt | date('d/m/Y')}}
+							</div>
+							</div>
+						{% endfor %}
+				</div>	
+				{% endif %}
+
 				{# -----------------  Affiche les articles ---------------------------#}
 				<div class="row">
 					<h1 class="formulaire-titre">Articles récents</h1>
 
 					{% for article in articles %}
 						<div class="card" style="width: 18rem;">
+
 							<img src="{{ asset('uploads/images/'~ article.media[0].nom) | imagine_filter('photo_article') }}" class="card-img-top mt-2" alt="Photo article">
+					
 							<div class="card-header">
 								{{ article.publierAt | date('Y')}} - {{article.titre}}
 							</div>
@@ -110,30 +139,7 @@
 				<div class="row">
 					<hr>
 				</div>
-				{# --------------------------------  Résultat de la recherche -------------------------#}
-
-				{% if articlesRecherche | length > 0 %}
-				<div class="row">
-					<h1 class="formulaire-titre">{{ articlesRecherche | length }} article(s) trouvé(s).</h1>
-						{% for item in articlesRecherche %}
-							<div class="card" style="width: 18rem;">
-								<img src="{{ asset('uploads/images/'~ item.media[0].nom) | imagine_filter('photo_article') }}" class="card-img-top mt-2" alt="Photo article">
-							<div class="card-header">
-								{{ item.publierAt | date('Y')}} - {{item.titre}}
-							</div>
-							<div class="card-body">
-								<h5 class="formulaire-titre">{{ item.titre}}</h5>
-								<h6 class="card-subtitle mb-2 text-muted">{{ item.legende}}</h6>
-								<div class="texte-normal">{{ item.sommaire | raw}}</div>
-								<a href="{{ path('article_afficher', {slug : item.slug})}}" class="formulaire-bouton btn-info">Lire l'article </a>
-							</div>
-							<div class="card-footer text-muted">
-								Publié le {{ item.publierAt | date('d/m/Y')}}
-							</div>
-							</div>
-						{% endfor %}
-				</div>	
-				{% endif %}
+				
 				
 			</div>
 		</div>

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conseil{% endblock %}
+
+{% block body %}
+    <h1>Conseil</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ conseil.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ conseil.titre }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ conseil.contenu }}</td>
+            </tr>
+            <tr>
+                <th>PublierAt</th>
+                <td>{{ conseil.publierAt ? conseil.publierAt|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>ModifierAt</th>
+                <td>{{ conseil.modifierAt ? conseil.modifierAt|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ conseil.type }}</td>
+            </tr>
+            <tr>
+                <th>Domaine</th>
+                <td>{{ conseil.domaine }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('conseil_index') }}">back to list</a>
+
+    <a href="{{ path('conseil_edit', {'id': conseil.id}) }}">edit</a>
+
+    {{ include('conseil/_delete_form.html.twig') }}
+{% endblock %}

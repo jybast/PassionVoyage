@@ -30,9 +30,10 @@ class ContactType extends AbstractType
                     'class' => 'formulaire-input'
                 ]
             ])
-            ->add('message', CKEditorType::class, [
+            ->add('message', CKeditorType::class, [
                 'label' => 'Votre message',
                 'label_attr' => ['class' =>'formulaire-label',],
+                'config' => ['toolbar' => 'basic']
             ])
             ->add('Envoyer', SubmitType::class, [
                 'attr' => [
